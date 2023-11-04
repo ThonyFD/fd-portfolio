@@ -1,0 +1,22 @@
+<ion-grid class="classic-container">
+  <ion-row class="ion-justify-content-center">
+    <ion-col>
+      <div class="avatar-flex">
+        <div class="avatar">
+          <img [ngSrc]="profile.img" alt="Avatar" fill="contain">
+        </div>
+        <div class="avatar-text">
+          <h1 class="title">{{profile.title}}</h1>
+          <h2 class="sub-title" [innerHTML]="profile.subTitle">
+          </h2>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="profile.description">
+    <ion-col>
+      <hr/>
+      <p class="description" [innerHTML]="profile.description"></p>
+    </ion-col>
+  </ion-row>
+</ion-grid>
