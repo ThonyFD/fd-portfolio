@@ -1,0 +1,13 @@
+.avatar-flex {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}

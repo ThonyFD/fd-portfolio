@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="light">
+    <ion-title slot="start">
+      <ion-icon name="construct"></ion-icon>
+      UNDER CONSTRUCTION
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button href="https://www.linkedin.com/in/thonyfd/">
+        <ion-icon slot="icon-only" name="logo-linkedin"></ion-icon>
+      </ion-button>
+      <ion-button href="https://github.com/ThonyFD">
+        <ion-icon slot="icon-only" name="logo-github"></ion-icon>
+      </ion-button>
+      <ion-button href="https://api.whatsapp.com/send?l=es&phone=50765839292">
+        <ion-icon slot="icon-only" name="logo-whatsapp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size-lg="9" size-sm="12" size-md="8">
+        <app-profile-card [profile]="head"></app-profile-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size-lg="4" size-sm="12" size-md="4" class="classic-container" *ngFor="let app of apps">
+        <app-profile-card [profile]="app"></app-profile-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

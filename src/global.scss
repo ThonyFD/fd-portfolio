@@ -24,3 +24,15 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+hr {
+  border-top: 1px solid #d69b9b30;
+  margin: 8px 0;
+}
+
+.classic-container {
+  border-radius: 16px;
+  background: var(--ion-color-light);
+  margin: 10px;
+  padding: 8px;
+}
