@@ -11,10 +11,12 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install Dependencies
         run: |
+          bash
           npm i -g firebase-tools
           npm i -g @angular/cli
           npm i -g @ionic/cli
           npm i
+          npm version ${{github.run_number}}
           npm run build --prod
       - uses: FirebaseExtended/action-hosting-deploy@v0.7.1
         with:
