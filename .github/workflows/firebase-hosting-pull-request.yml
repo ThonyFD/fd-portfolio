@@ -14,6 +14,7 @@ jobs:
           npm i -g firebase-tools
           npm i -g @angular/cli
           npm i -g @ionic/cli
+          npm i
           npm run build --prod
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
