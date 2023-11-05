@@ -16,12 +16,12 @@ export class HomePage {
     img: 'assets/avatar.jpeg',
     title: 'Anthony Mosquera',
     subTitle: "Engineer Manager • Developer Manager • Team Builder <br/>Frontend Engineer • Backend Engineer • Ionic Expert",
-    description: "Tengo mucha experiencia trabajando con equipos ágiles de alto rendimiento, en los cuales puedo servir como líder, y aportar toda la experiencia que he ganado a través de mi carrera profesional."
+   // description: "Tengo mucha experiencia trabajando con equipos ágiles de alto rendimiento, en los cuales puedo servir como líder, y aportar toda la experiencia que he ganado a través de mi carrera profesional."
   }
   public apps: Array<any> = [{
     img: 'assets/tigo.webp',
     title: 'Digital Developer Manager',
-    subTitle: 'Tigo Panamá • Millicom',
+    subTitle: 'Tigo Panamá • Millicom(Filial)',
   },{
     img: 'assets/wicon.jpeg',
     title: 'Arquitecto Empresarial',
@@ -43,6 +43,8 @@ export class HomePage {
     title: 'Junior Developer',
     subTitle: 'Movistar Panamá • Telefónica(Filial)',
   }]
-  constructor() {}
+  constructor() {
+
+  }
 
 }
