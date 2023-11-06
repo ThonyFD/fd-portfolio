@@ -19,6 +19,8 @@ jobs:
       - name: Build Dev
         run: |
           echo "Build version ${{github.run_number}}"
+          git config user.email "ci-cd@example.com"
+          git config user.name "Github CI/CD"
           npm version "1.0.${{github.run_number}}.dev" --force
           npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0.7.1
