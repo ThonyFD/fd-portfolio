@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {IonicModule} from "@ionic/angular";
 import {ProfileCardComponent} from "../../components/profile-card/profile-card.component";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-tab1',
@@ -12,6 +13,7 @@ import {ProfileCardComponent} from "../../components/profile-card/profile-card.c
 })
 export class HomePage {
 
+  public version:string = environment.version
   public head = {
     img: 'assets/avatar.jpeg',
     title: 'Anthony Mosquera',
