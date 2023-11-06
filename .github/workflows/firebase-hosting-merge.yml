@@ -21,7 +21,7 @@ jobs:
       - name: Build
         run: |
           echo "Build version ${{github.run_number}}"
-          npm version "1.0.${{github.run_number}}"
+          npm version "1.0.${{github.run_number}}" --force
           npm run build --prod
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
