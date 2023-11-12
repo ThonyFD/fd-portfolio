@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {IonicModule} from "@ionic/angular";
+import {Section} from "../../models/section";
 
 @Component({
   selector: 'app-profile-card',
@@ -11,8 +12,7 @@ import {IonicModule} from "@ionic/angular";
 })
 export class ProfileCardComponent  implements OnInit {
 
-  @Input('profile') profile: any;
-  constructor() { }
+  @Input('slot') slot: Section = {} as Section;
 
   ngOnInit() {}
 
