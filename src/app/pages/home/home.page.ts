@@ -1,8 +1,13 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {CommonModule} from "@angular/common";
-import {IonicModule} from "@ionic/angular";
+import {ActionSheetController, IonicModule, LoadingController} from "@ionic/angular";
 import {ProfileCardComponent} from "../../components/profile-card/profile-card.component";
 import {environment} from "../../../environments/environment";
+import {FirebaseService} from "../../services/firebase.service";
+import {Section} from "../../models/section";
+import {MessageService} from "../../services/message.service";
+import {GlobalService} from "../../services/global.service";
+import {combineLatest} from "rxjs";
 
 @Component({
   selector: 'app-tab1',
@@ -13,40 +18,77 @@ import {environment} from "../../../environments/environment";
 })
 export class HomePage {
 
-  public version:string = environment.version
-  public head = {
-    img: 'assets/avatar.jpeg',
-    title: 'Anthony Mosquera',
-    subTitle: "Engineer Manager • Developer Manager • Team Builder <br/>Frontend Engineer • Backend Engineer • Ionic Expert",
-   // description: "Tengo mucha experiencia trabajando con equipos ágiles de alto rendimiento, en los cuales puedo servir como líder, y aportar toda la experiencia que he ganado a través de mi carrera profesional."
-  }
-  public apps: Array<any> = [{
-    img: 'assets/tigo.webp',
-    title: 'Digital Developer Manager',
-    subTitle: 'Tigo Panamá • Millicom(Filial)',
-  },{
-    img: 'assets/wicon.jpeg',
-    title: 'Arquitecto Empresarial',
-    subTitle: 'Wicon Panamá • Freelance',
-  },{
-    img: 'assets/bg.webp',
-    title: 'Senior Developer',
-    subTitle: 'Banca Móvil • Banco General',
-  },{
-    img: 'assets/yappy.webp',
-    title: 'Senior Developer',
-    subTitle: 'Yappy • Banco General',
-  },{
-    img: 'assets/banistmo.webp',
-    title: 'Ingeniero de AWS',
-    subTitle: 'Banistmo • Bancolombia(Filial)',
-  },{
-    img: 'assets/movistar.webp',
-    title: 'Junior Developer',
-    subTitle: 'Movistar Panamá • Telefónica(Filial)',
-  }]
-  constructor() {
+  public config: any
+  public version: string = environment.version
+  public sections: Array<Section> = []
 
+  constructor(
+    private fireService: FirebaseService,
+    private messageService: MessageService,
+    private actionSheetCtrl: ActionSheetController,
+    private globalService: GlobalService,
+    private loadingController: LoadingController,
+  ) {
+  }
+
+  ionViewWillEnter() {
+    this.init()
+  }
+
+  private async init(): Promise<void> {
+    const loading = await this.loadingController.create()
+
+    try {
+      await loading.present()
+      await this.fireService.loadConfig()
+      await this.fireService.loadSections()
+
+      combineLatest({
+        config: this.globalService.config$,
+        sections: this.globalService.sections$
+      }).subscribe(res => {
+        this.config = res.config
+        this.sections = res.sections
+
+        loading.dismiss()
+      })
+
+    } catch (err) {
+      console.error(err)
+      this.messageService.showErrorToast()
+    }
+  }
+
+  async presentLanguages() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      cssClass: 'custom-action-sheet',
+      header: this.config.locale.localeSelectTitle,
+      buttons: this.config.languages.map((option: any) => {
+        return {
+          text: option.label,
+          icon: option.icon,
+          handler: () => {
+            this.changeLocale(option.code)
+          }
+        }
+      })
+    });
+
+    await actionSheet.present();
+  }
+
+  private async changeLocale(locale: string): Promise<void> {
+    const loading = await this.loadingController.create()
+
+    try {
+      await loading.present()
+      await this.fireService.changeLocale(locale)
+    } catch (err) {
+      console.error(err)
+      this.messageService.showErrorToast()
+    } finally {
+      loading.dismiss()
+    }
   }
 
 }
