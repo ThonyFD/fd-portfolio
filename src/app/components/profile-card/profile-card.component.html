@@ -3,7 +3,10 @@
     <ion-col>
       <div class="avatar-flex">
         <div class="avatar">
-          <img [ngSrc]="slot.logo" alt="Avatar" fill="contain">
+          <img [ngSrc]="slot.logo" alt="Avatar" fill="contain" [ngStyle]="{
+          'object-fit': slot.fit,
+          'background-color': slot.color || 'transparent'
+          }">
         </div>
         <div class="avatar-text">
           <h1 class="title">{{slot.title}}</h1>
@@ -14,15 +17,15 @@
   </ion-row>
   <ion-row class="ion-justify-content-between ion-align-items-center" (click)="slot.showDescription=true"
            *ngIf="!slot.isHead">
-    <ion-col size="2" [hidden]="!slot.end">
+    <ion-col size="4" [hidden]="!slot.end">
       <ion-chip [color]="slot.end?.toLowerCase()==='now'?'danger':'medium'">{{slot.end}}</ion-chip>
     </ion-col>
-    <ion-col size="auto">
+    <ion-col size="4" class="ion-align-items-center ion-text-center">
       <ion-button fill="clear" color="medium" *ngIf="slot.description && !slot.showDescription">
         <ion-icon slot="icon-only" name="chevron-down-outline"></ion-icon>
       </ion-button>
     </ion-col>
-    <ion-col size="2" [hidden]="!slot.start">
+    <ion-col size="4" [hidden]="!slot.start">
       <ion-chip color="medium">{{slot.start}}</ion-chip>
     </ion-col>
   </ion-row>
@@ -45,3 +48,13 @@
 </ion-grid>
 
 
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resumen de Experiencia - Telefónica Movistar</title>
+</head>
+
+<body>

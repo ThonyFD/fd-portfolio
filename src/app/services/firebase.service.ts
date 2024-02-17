@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {initializeApp} from "firebase/app";
-import {getFirestore, Firestore, getDoc, getDocs, collection, doc} from "firebase/firestore";
+import {getFirestore, Firestore, getDoc, getDocs, collection, doc, setDoc} from "firebase/firestore";
+import {getDownloadURL, ref, getStorage, FirebaseStorage} from "firebase/storage";
 import {environment} from "../../environments/environment";
 import {Section} from "../models/section";
 import {GlobalService} from "./global.service";
@@ -14,6 +15,7 @@ import {lastValueFrom, take} from "rxjs";
 export class FirebaseService {
 
   private db: Firestore;
+  private storage: FirebaseStorage;
 
   constructor(
     private globalService: GlobalService,
@@ -21,6 +23,7 @@ export class FirebaseService {
   ) {
     const app = initializeApp(environment.firebase);
     this.db = getFirestore(app);
+    this.storage = getStorage(app);
   }
 
   public async changeLocale(locale: string): Promise<void> {
@@ -58,12 +61,19 @@ export class FirebaseService {
     const lang = locale || config.locale.code
 
     snapShop.forEach(docData => {
+
       const rawData = docData.data() as Section
+      console.log('rawData: ', docData.id)
+      console.log('rawData: ', JSON.stringify(rawData))
       if (rawData.visible && rawData.locale === lang) {
         slots.push(docData.data() as Section)
       }
     })
 
     this.globalService.setSections(this.utilsService.toSorted(slots))
+  }
+
+  public async getProfileImages(): Promise<string> {
+    return await getDownloadURL(ref(this.storage, 'profile.png'));
   }
 }

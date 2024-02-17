@@ -15,6 +15,11 @@ hr {
   overflow: hidden;
   position: relative;
   flex-shrink: 0;
+
+  img {
+    object-fit: cover;
+    background: var(--ion-color-light);
+  }
 }
 
 .avatar-text {
@@ -50,4 +55,10 @@ hr {
 
 .description {
   text-align: justify;
+}
+
+@media only screen and (min-width: 640px) and (max-width: 1024px) {
+  .avatar-flex {
+    flex-direction: column;
+  }
 }

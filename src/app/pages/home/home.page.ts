@@ -8,17 +8,19 @@ import {Section} from "../../models/section";
 import {MessageService} from "../../services/message.service";
 import {GlobalService} from "../../services/global.service";
 import {combineLatest} from "rxjs";
+import {SortByPipe} from "../../pipes/sort-by.pipe";
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, ProfileCardComponent]
+  imports: [CommonModule, IonicModule, ProfileCardComponent, SortByPipe],
 })
 export class HomePage {
 
   public config: any
+  public profileImage: string = ''
   public version: string = environment.version
   public sections: Array<Section> = []
 
@@ -42,7 +44,8 @@ export class HomePage {
       await loading.present()
       await this.fireService.loadConfig()
       await this.fireService.loadSections()
-
+      this.profileImage = await this.fireService.getProfileImages()
+      console.log('this.profileImage: ', this.profileImage)
       combineLatest({
         config: this.globalService.config$,
         sections: this.globalService.sections$
