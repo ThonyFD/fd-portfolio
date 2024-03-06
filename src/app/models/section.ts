@@ -10,6 +10,7 @@ export interface Section {
   locale: any
   logo: string
   order: number
+  orientation: string
   sizeLg: number
   start: string
   slots: Array<Section>

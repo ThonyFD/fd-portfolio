@@ -20,34 +20,64 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <ng-container *ngFor="let section of sections | sortBy:'order':true">
-      <ion-grid>
-        <ion-row class="ion-justify-content-center" *ngIf="section.isHead">
-          <ion-col size-lg="9" size-sm="12" size-md="9">
-            <app-profile-card [slot]="section"></app-profile-card>
-          </ion-col>
-        </ion-row>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ng-container *ngFor="let section of sections | sortBy:'order':true">
+          <ion-grid>
 
-        <ion-row class="ion-justify-content-center ion-align-items-center" *ngIf="section.hasHeading">
-          <ion-col size="2">
-            <hr/>
-          </ion-col>
-          <ion-col size="auto">
-            <ion-button fill="clear" color="medium">
-              <ion-icon slot="icon-only" [name]="section.icon"></ion-icon>
-              <span class="ion-margin-start">{{section.label}}</span>
-            </ion-button>
-          </ion-col>
-          <ion-col size="2">
-            <hr/>
-          </ion-col>
-        </ion-row>
+            <ion-row class="ion-justify-content-center" *ngIf="section.isHead">
+              <ion-col size-lg="9" size-sm="12" size-md="12" sizeXs="12">
+                <app-profile-card [slot]="section"></app-profile-card>
+              </ion-col>
+            </ion-row>
 
-        <ion-row class="ion-justify-content-center" *ngIf="section?.slots?.length">
-          <ion-col [sizeLg]="section.sizeLg || 4" size-sm="12" size-md="5" class="classic-container no-height-grow" *ngFor="let app of section.slots | sortBy:'order':false">
-            <app-profile-card [slot]="app"></app-profile-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ng-container>
+            <ion-row>
+              <ion-col>
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center ion-align-items-center" *ngIf="section.hasHeading">
+                    <ion-col size="2">
+                      <hr/>
+                    </ion-col>
+                    <ion-col size="auto">
+                      <ion-button fill="clear" color="medium">
+                        <ion-icon slot="icon-only" [name]="section.icon"></ion-icon>
+                        <span class="ion-margin-start">{{section.label}}</span>
+                      </ion-button>
+                    </ion-col>
+                    <ion-col size="2">
+                      <hr/>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row class="ion-justify-content-center" *ngIf="section?.slots?.length">
+                    <ion-col [sizeLg]="section.sizeLg || 4" size-sm="12" size-md="5"
+                             class="classic-container no-height-grow"
+                             *ngFor="let app of section.slots | sortBy:'order':false">
+                      <app-profile-card [slot]="app" [orientation]="section.orientation"></app-profile-card>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ng-container>
+      </ion-col>
+    <!--
+      <ion-col size="4" class="chatbot">
+        <ion-grid class="classic-container chatbox">
+          <ion-row>
+            <ion-col size="12">
+              <ion-list>
+                <ion-item>
+                  <ion-input aria-label="Email" placeholder="¿Tienes preguntas para mí?"></ion-input>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    -->
+    </ion-row>
+  </ion-grid>
 </ion-content>

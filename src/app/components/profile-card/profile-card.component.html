@@ -1,7 +1,7 @@
 <ion-grid class="classic-container">
   <ion-row class="ion-justify-content-center">
     <ion-col>
-      <div class="avatar-flex">
+      <div class="avatar-flex" [ngClass]="orientation">
         <div class="avatar">
           <img [ngSrc]="slot.logo" alt="Avatar" fill="contain" [ngStyle]="{
           'object-fit': slot.fit,
@@ -15,6 +15,7 @@
       </div>
     </ion-col>
   </ion-row>
+
   <ion-row class="ion-justify-content-between ion-align-items-center" (click)="slot.showDescription=true"
            *ngIf="!slot.isHead">
     <ion-col size="4" [hidden]="!slot.end">
