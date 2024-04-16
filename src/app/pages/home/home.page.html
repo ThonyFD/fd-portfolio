@@ -54,7 +54,7 @@
                     <ion-col [sizeLg]="section.sizeLg || 4" size-sm="12" size-md="5"
                              class="classic-container no-height-grow"
                              *ngFor="let app of section.slots | sortBy:'order':false">
-                      <app-profile-card [slot]="app" [orientation]="section.orientation"></app-profile-card>
+                      <app-slot-card [slot]="app" [orientation]="section.orientation"></app-slot-card>
                     </ion-col>
                   </ion-row>
                 </ion-grid>

@@ -40,14 +40,19 @@ hr {
   }
 }
 
+.avatar-left {
+  display: flex;
+  border-right: 1px solid #d7d8da;
+}
+
 .avatar-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-width: 100px;
   margin-left: 16px;
 
   h1 {
-    font-size: 1.7em;
     margin-bottom: 0;
     margin-top: 0;
   }
@@ -66,9 +71,19 @@ hr {
   }
 }
 
-.sub-title {
+.avatar-tags {
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  padding-left: 8px;
+  border-left: 1px solid #87d29f;
+}
+
+.title {
   font-size: 1.2em;
-  text-align: justify;
+}
+.sub-title {
+  font-size: 0.8em;
   color: #656565cc;
 }
 
@@ -76,7 +91,8 @@ hr {
   text-align: justify;
 }
 
-@media only screen and (min-width: 200px) and (max-width: 540px) {
+// small phones
+@media only screen and (max-width: 576px) {
   .avatar-flex.horizontal,
   .avatar-flex.vertical,
   .avatar-flex {
@@ -86,12 +102,19 @@ hr {
     text-align: center;
   }
 
+  .avatar-left {
+    border: none;
+  }
+
   .avatar {
     width: 100%;
     height: 150px;
   }
-
+  .avatar-left {
+    flex-direction: column;
+  }
   .avatar-text {
+    border: none;
     margin-top: 8px;
     
     .title {
@@ -104,4 +127,38 @@ hr {
       color: #656565cc;
     }
   }
+  .avatar-tags {
+    justify-content: center;
+    border: none;
+  }
+}
+
+/* Teléfonos móviles pequeños (landscape) y tablets pequeñas */
+@media screen and (min-width: 576px) and (max-width: 991px) {
+  .avatar-left {
+    flex-direction: column;
+  }
+  .avatar-text {
+    margin: 8px;
+  }
+}
+
+/* Tablets y computadoras portátiles */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  /* Estilos específicos para tablets y computadoras portátiles */
+}
+
+/* Computadoras de escritorio estándar */
+@media screen and (min-width: 1200px) and (max-width: 1439px) {
+  /* Estilos específicos para computadoras de escritorio estándar */
+}
+
+/* Pantallas de alta resolución y computadoras de escritorio grandes */
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+  /* Estilos específicos para pantallas de alta resolución y computadoras de escritorio grandes */
+}
+
+/* Pantallas de alta resolución y monitores grandes */
+@media screen and (min-width: 1920px) {
+  /* Estilos específicos para pantallas de alta resolución y monitores grandes */
 }

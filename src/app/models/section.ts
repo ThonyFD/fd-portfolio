@@ -16,6 +16,7 @@ export interface Section {
   slots: Array<Section>
   showDescription?: boolean
   subTitle: string
+  tags: Array<string>
   title: string
   visible: boolean
 }

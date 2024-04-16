@@ -9,13 +9,14 @@ import {MessageService} from "../../services/message.service";
 import {GlobalService} from "../../services/global.service";
 import {combineLatest} from "rxjs";
 import {SortByPipe} from "../../pipes/sort-by.pipe";
+import { SlotCardComponent } from "../../components/slot-card/slot-card.component";
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
-  standalone: true,
-  imports: [CommonModule, IonicModule, ProfileCardComponent, SortByPipe],
+    selector: 'app-tab1',
+    templateUrl: 'home.page.html',
+    styleUrls: ['home.page.scss'],
+    standalone: true,
+    imports: [CommonModule, IonicModule, ProfileCardComponent, SortByPipe, SlotCardComponent]
 })
 export class HomePage {
 
