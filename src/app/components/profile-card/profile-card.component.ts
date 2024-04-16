@@ -13,6 +13,7 @@ import {Section} from "../../models/section";
 export class ProfileCardComponent  implements OnInit {
 
   @Input('slot') slot: Section = {} as Section;
+  @Input('orientation') orientation: string = 'horizontal';
 
   ngOnInit() {}
 

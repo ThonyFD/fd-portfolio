@@ -1,6 +1,8 @@
 export interface Section {
+  color: string
   description: string
   end?: string
+  fit?: string
   hasHeading: boolean
   icon: string
   isHead: boolean
@@ -8,10 +10,13 @@ export interface Section {
   locale: any
   logo: string
   order: number
+  orientation: string
+  sizeLg: number
   start: string
   slots: Array<Section>
   showDescription?: boolean
   subTitle: string
+  tags: Array<string>
   title: string
   visible: boolean
 }

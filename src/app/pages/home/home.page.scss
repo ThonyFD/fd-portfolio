@@ -11,3 +11,12 @@
   position: relative;
   flex-shrink: 0;
 }
+.chatbot {
+  padding-top: 10px;
+
+  .chatbox {
+    min-height: 250px;
+    display: flex;
+    align-items: end;
+  }
+}
