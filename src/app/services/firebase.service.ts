@@ -63,8 +63,7 @@ export class FirebaseService {
     snapShop.forEach(docData => {
 
       const rawData = docData.data() as Section
-      console.log('rawData: ', docData.id)
-      console.log('rawData: ', JSON.stringify(rawData))
+
       if (rawData.visible && rawData.locale === lang) {
         slots.push(docData.data() as Section)
       }

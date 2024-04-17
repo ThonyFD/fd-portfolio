@@ -4,13 +4,14 @@
       <div class="avatar-flex" [ngClass]="orientation">
         <div class="avatar">
           <img
-            [ngSrc]="slot.logo"
-            alt="Avatar"
+            alt="icono"
             fill="contain"
+            [ngSrc]="'https://firebasestorage.googleapis.com/v0/b/thony-test.appspot.com/o/'+slot.logo+'?alt=media'"
             [ngStyle]="{
               'object-fit': slot.fit,
               'background-color': slot.color || 'transparent'
             }"
+            (load)="loaded = true"
           />
         </div>
         <div class="avatar-text">

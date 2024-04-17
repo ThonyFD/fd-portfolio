@@ -14,6 +14,8 @@ export class SlotCardComponent  implements OnInit {
 
   @Input('slot') slot: Section = {} as Section;
   @Input('orientation') orientation: string = 'horizontal';
+  
+  public loaded = false
 
   ngOnInit() {}
 

@@ -46,7 +46,7 @@ export class HomePage {
       await this.fireService.loadConfig()
       await this.fireService.loadSections()
       this.profileImage = await this.fireService.getProfileImages()
-      console.log('this.profileImage: ', this.profileImage)
+
       combineLatest({
         config: this.globalService.config$,
         sections: this.globalService.sections$
