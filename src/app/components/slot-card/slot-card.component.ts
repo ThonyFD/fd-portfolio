@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {IonicModule} from "@ionic/angular";
 import {Section} from "../../models/section";
@@ -10,13 +10,10 @@ import {Section} from "../../models/section";
   standalone: true,
   imports: [CommonModule, NgOptimizedImage, IonicModule]
 })
-export class SlotCardComponent  implements OnInit {
+export class SlotCardComponent {
 
   @Input('slot') slot: Section = {} as Section;
   @Input('orientation') orientation: string = 'horizontal';
   
   public loaded = false
-
-  ngOnInit() {}
-
 }

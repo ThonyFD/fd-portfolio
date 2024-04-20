@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {ActionSheetController, IonicModule, LoadingController} from "@ionic/angular";
 import {ProfileCardComponent} from "../../components/profile-card/profile-card.component";
@@ -10,6 +10,7 @@ import {GlobalService} from "../../services/global.service";
 import {combineLatest} from "rxjs";
 import {SortByPipe} from "../../pipes/sort-by.pipe";
 import { SlotCardComponent } from "../../components/slot-card/slot-card.component";
+import { IonModal } from '@ionic/angular/common';
 
 @Component({
     selector: 'app-tab1',
@@ -19,11 +20,14 @@ import { SlotCardComponent } from "../../components/slot-card/slot-card.componen
     imports: [CommonModule, IonicModule, ProfileCardComponent, SortByPipe, SlotCardComponent]
 })
 export class HomePage {
+  @ViewChild(IonModal) detailModal!: IonModal;
 
   public config: any
   public profileImage: string = ''
   public version: string = environment.version
   public sections: Array<Section> = []
+  public isModalOpen = false;
+  public currentSection!: Section;
 
   constructor(
     private fireService: FirebaseService,
@@ -36,6 +40,17 @@ export class HomePage {
 
   ionViewWillEnter() {
     this.init()
+  }
+  
+  closeModal() {
+    this.isModalOpen = false
+  }
+
+  openDetails(section: Section) {
+    this.isModalOpen = false
+    console.log('this.isModalOpen: ',this.isModalOpen)
+    this.isModalOpen = true
+    this.currentSection = section
   }
 
   private async init(): Promise<void> {

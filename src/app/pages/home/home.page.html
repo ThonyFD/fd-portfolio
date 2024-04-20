@@ -25,7 +25,6 @@
       <ion-col size="12">
         <ng-container *ngFor="let section of sections | sortBy:'order':true">
           <ion-grid>
-
             <ion-row class="ion-justify-content-center" *ngIf="section.isHead">
               <ion-col size-lg="9" size-sm="12" size-md="12" sizeXs="12">
                 <app-profile-card [slot]="section"></app-profile-card>
@@ -35,26 +34,43 @@
             <ion-row>
               <ion-col>
                 <ion-grid>
-                  <ion-row class="ion-justify-content-center ion-align-items-center" *ngIf="section.hasHeading">
+                  <ion-row
+                    class="ion-justify-content-center ion-align-items-center"
+                    *ngIf="section.hasHeading"
+                  >
                     <ion-col size="2">
-                      <hr/>
+                      <hr />
                     </ion-col>
                     <ion-col size="auto">
                       <ion-button fill="clear" color="medium">
-                        <ion-icon slot="icon-only" [name]="section.icon"></ion-icon>
+                        <ion-icon
+                          slot="icon-only"
+                          [name]="section.icon"
+                        ></ion-icon>
                         <span class="ion-margin-start">{{section.label}}</span>
                       </ion-button>
                     </ion-col>
                     <ion-col size="2">
-                      <hr/>
+                      <hr />
                     </ion-col>
                   </ion-row>
 
-                  <ion-row class="ion-justify-content-center" *ngIf="section?.slots?.length">
-                    <ion-col [sizeLg]="section.sizeLg || 4" size-sm="12" size-md="5"
-                             class="classic-container no-height-grow"
-                             *ngFor="let app of section.slots | sortBy:'order':false">
-                      <app-slot-card [slot]="app" [orientation]="section.orientation"></app-slot-card>
+                  <ion-row
+                    class="ion-justify-content-center"
+                    *ngIf="section?.slots?.length"
+                  >
+                    <ion-col
+                      [sizeLg]="section.sizeLg || 4"
+                      size-sm="12"
+                      size-md="5"
+                      class="classic-container no-height-grow"
+                      *ngFor="let app of section.slots | sortBy:'order':false"
+                      (click)="openDetails(app)"
+                    >
+                      <app-slot-card
+                        [slot]="app"
+                        [orientation]="section.orientation"
+                      ></app-slot-card>
                     </ion-col>
                   </ion-row>
                 </ion-grid>
@@ -63,7 +79,7 @@
           </ion-grid>
         </ng-container>
       </ion-col>
-    <!--
+      <!--
       <ion-col size="4" class="chatbot">
         <ion-grid class="classic-container chatbox">
           <ion-row>
@@ -80,4 +96,32 @@
     -->
     </ion-row>
   </ion-grid>
+
+  <ion-modal
+    [isOpen]="isModalOpen"
+    [initialBreakpoint]="1"
+    [breakpoints]="[0, 1]"
+    (willDismiss)="isModalOpen = false"
+  >
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-button slot="start" fill="clear" (click)="closeModal()">
+            <ion-icon color="dark" slot="icon-only" name="close"></ion-icon>
+          </ion-button>
+
+          <ion-title slot="end">{{currentSection.title}}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <app-slot-card [slot]="currentSection"></app-slot-card>
+
+        <hr />
+
+        <div class="description">
+          <div [innerHTML]="currentSection.description"></div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
