@@ -2,22 +2,26 @@
   <ion-row class="ion-justify-content-center">
     <ion-col>
       <div class="avatar-flex" [ngClass]="orientation">
-        <div class="avatar">
+        <div class="avatar" *ngIf="loaded === 'loading' || loaded === 'loaded'">
+          <img src="assets/spinner.svg" [hidden]="loaded !== 'loading'"/>
           <img
             alt="icono"
             fill="contain"
+            priority
+            [hidden]="loaded !== 'loaded'"
             [ngSrc]="'https://firebasestorage.googleapis.com/v0/b/thony-test.appspot.com/o/'+slot.logo+'?alt=media'"
             [ngStyle]="{
               'object-fit': slot.fit,
               'background-color': slot.color || 'transparent'
             }"
-            (load)="loaded = true"
+            (load)="loaded = 'loaded'"
+            (error)="loaded = 'error'"
           />
         </div>
         <div class="avatar-text">
           <h1 class="title">{{ slot.title }}</h1>
           <h2 class="sub-title" [innerHTML]="slot.subTitle"></h2>
-          <h4 class="sub-line">
+          <h4 class="sub-line" *ngIf="slot.end && slot.start">
             <span *ngIf="slot.end?.toLowerCase() === 'now'" class="danger">
               <span class="red-dot">&#8226;</span> {{ slot.end }}
             </span>

@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {CommonModule} from "@angular/common";
-import {ActionSheetController, IonicModule, LoadingController} from "@ionic/angular";
+import {ActionSheetController, IonicModule, IonModal, LoadingController} from "@ionic/angular";
 import {ProfileCardComponent} from "../../components/profile-card/profile-card.component";
 import {environment} from "../../../environments/environment";
 import {FirebaseService} from "../../services/firebase.service";
@@ -10,7 +10,7 @@ import {GlobalService} from "../../services/global.service";
 import {combineLatest} from "rxjs";
 import {SortByPipe} from "../../pipes/sort-by.pipe";
 import { SlotCardComponent } from "../../components/slot-card/slot-card.component";
-import { IonModal } from '@ionic/angular/common';
+
 
 @Component({
     selector: 'app-tab1',
@@ -28,6 +28,7 @@ export class HomePage {
   public sections: Array<Section> = []
   public isModalOpen = false;
   public currentSection!: Section;
+  public loaded = false;
 
   constructor(
     private fireService: FirebaseService,
@@ -47,17 +48,18 @@ export class HomePage {
   }
 
   openDetails(section: Section) {
-    this.isModalOpen = false
-    console.log('this.isModalOpen: ',this.isModalOpen)
-    this.isModalOpen = true
-    this.currentSection = section
+    if(section.description) {
+      this.isModalOpen = false
+      console.log('this.isModalOpen: ',this.isModalOpen)
+      this.isModalOpen = true
+      this.currentSection = section
+    }
   }
 
   private async init(): Promise<void> {
-    const loading = await this.loadingController.create()
+    this.loaded = false
 
     try {
-      await loading.present()
       await this.fireService.loadConfig()
       await this.fireService.loadSections()
       this.profileImage = await this.fireService.getProfileImages()
@@ -69,7 +71,7 @@ export class HomePage {
         this.config = res.config
         this.sections = res.sections
 
-        loading.dismiss()
+        this.loaded = true
       })
 
     } catch (err) {
