@@ -61,12 +61,214 @@ export class FirebaseService {
     const lang = locale || config.locale.code
 
     snapShop.forEach(docData => {
-
       const rawData = docData.data() as Section
+      console.log(docData.id)
+      console.log(JSON.stringify(rawData))
 
       if (rawData.visible && rawData.locale === lang) {
         slots.push(docData.data() as Section)
       }
+
+      const docs = [
+        {
+          "id":"frontend",
+          "slots": [
+            {
+              "order": 5,
+              "logo": "js.webp",
+              "title": "JavaScript",
+              "subTitle": "Expert"
+            },
+            {
+              "title": "Angular",
+              "order": 4,
+              "logo": "angular.webp",
+              "subTitle": "Expert"
+            },
+            {
+              "order": 3,
+              "logo": "vue.svg",
+              "subTitle": "Advance",
+              "title": "Vue",
+              "fit": "contain"
+            },
+            {
+              "title": "Ionic",
+              "logo": "ionic.svg",
+              "subTitle": "Expert",
+              "order": 2
+            },
+            {
+              "order": 1,
+              "subTitle": "Expert",
+              "logo": "capacitor.webp",
+              "title": "Capacitor"
+            },
+            {
+              "order": 0,
+              "subTitle": "Advance",
+              "logo": "react.svg",
+              "title": "React"
+            },
+          ],
+          "label": "Frontend",
+          "locale": "en",
+          "hasHeading": true,
+          "icon": "logo-html5",
+          "order": 2,
+          "sizeLg": "3",
+          "orientation": "vertical",
+          "visible": true
+        },
+        {
+          "id":"backend",
+          "slots": [
+            {
+              "subTitle": "Advance",
+              "order": 4,
+              "logo": "java.jpeg",
+              "title": "Java"
+            },
+            {
+              "subTitle": "Advance",
+              "order": 1,
+              "logo": "spring.svg",
+              "title": "Spring Boot"
+            },
+            {
+              "subTitle": "Expert",
+              "order": 3,
+              "title": "NodeJS",
+              "logo": "nodejs.png"
+            }
+          ],
+          "label": "Backend",
+          "locale": "en",
+          "hasHeading": true,
+          "icon": "hardware-chip-outline",
+          "order": 2,
+          "sizeLg": "3",
+          "orientation": "vertical",
+          "visible": true
+        },
+        {
+          "slots": [
+            {
+              "logo": "mysql.svg",
+              "subTitle": "Advance",
+              "title": "MySQL",
+              "order": 3
+            },
+            {
+              "logo": "oracle.svg",
+              "subTitle": "Advance",
+              "title": "ORACLE",
+              "order": 3
+            },
+            {
+              "logo": "mongodb.svg",
+              "title": "MongoDB",
+              "order": 3,
+              "subTitle": "Advance"
+            }
+          ],
+          "id": "databases",
+          "label": "Databases",
+          "locale": "en",
+          "hasHeading": true,
+          "icon": "server-outline",
+          "order": 2,
+          "sizeLg": "3",
+          "orientation": "vertical",
+          "visible": true
+        },
+        {
+          "slots": [
+            {
+              "fit": "contain",
+              "title": "Firebase",
+              "logo": "firebase.png",
+              "order": 0,
+              "subTitle": "Expert"
+            },
+            {
+              "fit": "contain",
+              "title": "AWS",
+              "logo": "aws.png",
+              "order": 0,
+              "subTitle": "Advance"
+            },
+            {
+              "fit": "contain",
+              "title": "Google Cloud",
+              "logo": "google-cloud.svg",
+              "order": 0,
+              "subTitle": "Advance"
+            },      
+            {
+              "fit": "contain",
+              "title": "Azure",
+              "logo": "azure.png",
+              "order": 0,
+              "subTitle": "Advance"
+            }
+          ],
+          "id": "cloud",
+          "label": "Cloud",
+          "locale": "en",
+          "hasHeading": true,
+          "icon": "cloud-outline",
+          "order": 2,
+          "sizeLg": "3",
+          "orientation": "vertical",
+          "visible": true
+        },
+        {
+          "slots": [
+            {
+              "fit": "contain",
+              "title": "Jenkins",
+              "logo": "jenkins.png",
+              "order": 0,
+              "subTitle": "Advance"
+            },
+            {
+              "fit": "contain",
+              "title": "Circle CI",
+              "logo": "circleci.png",
+              "order": 1,
+              "subTitle": "Advance"
+            },
+            {
+              "fit": "contain",
+              "title": "Argo CD / Argo Workflows",
+              "logo": "argo.png",
+              "order": 2,
+              "subTitle": "Advance"
+            },      
+            {
+              "fit": "contain",
+              "title": "Azure DevOps",
+              "logo": "azure-devops.svg",
+              "order": 3,
+              "subTitle": "Advance"
+            }
+          ],
+          "id": "ci-cd",
+          "label": "CI/CD",
+          "locale": "en",
+          "hasHeading": true,
+          "icon": "rocket-outline",
+          "order": 2,
+          "sizeLg": "3",
+          "orientation": "vertical",
+          "visible": true
+        }
+      ]
+
+      docs.forEach(document => {
+        setDoc(doc(this.db,'portfolio/tech-'+document.id), document)
+      })
     })
 
     this.globalService.setSections(this.utilsService.toSorted(slots))

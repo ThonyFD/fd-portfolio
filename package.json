@@ -7,7 +7,7 @@
     "ng": "ng",
     "start": "ng serve",
     "serve": "ng serve",
-    "build": "ionic build --prod",
+    "build": "npx ionic build --prod",
     "build-dev": "ionic build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

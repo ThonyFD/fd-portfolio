@@ -53,6 +53,7 @@ hr {
     .avatar-text,
     .sub-title,
     .title {
+      margin-left: 0;
       text-align: center;
     }
   }
@@ -150,4 +151,8 @@ hr {
   .avatar-tags {
     justify-content: center;
   }
+}
+
+@media (prefers-color-scheme: dark) {
+
 }
