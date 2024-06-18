@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {CommonModule} from "@angular/common";
-import {ActionSheetController, IonicModule, LoadingController} from "@ionic/angular";
+import {ActionSheetController, IonicModule, IonModal, LoadingController} from "@ionic/angular";
 import {ProfileCardComponent} from "../../components/profile-card/profile-card.component";
 import {environment} from "../../../environments/environment";
 import {FirebaseService} from "../../services/firebase.service";
@@ -11,6 +11,7 @@ import {combineLatest} from "rxjs";
 import {SortByPipe} from "../../pipes/sort-by.pipe";
 import { SlotCardComponent } from "../../components/slot-card/slot-card.component";
 
+
 @Component({
     selector: 'app-tab1',
     templateUrl: 'home.page.html',
@@ -19,11 +20,15 @@ import { SlotCardComponent } from "../../components/slot-card/slot-card.componen
     imports: [CommonModule, IonicModule, ProfileCardComponent, SortByPipe, SlotCardComponent]
 })
 export class HomePage {
+  @ViewChild(IonModal) detailModal!: IonModal;
 
   public config: any
   public profileImage: string = ''
   public version: string = environment.version
   public sections: Array<Section> = []
+  public isModalOpen = false;
+  public currentSection!: Section;
+  public loaded = false;
 
   constructor(
     private fireService: FirebaseService,
@@ -37,16 +42,28 @@ export class HomePage {
   ionViewWillEnter() {
     this.init()
   }
+  
+  closeModal() {
+    this.isModalOpen = false
+  }
+
+  openDetails(section: Section) {
+    if(section.description) {
+      this.isModalOpen = false
+      console.log('this.isModalOpen: ',this.isModalOpen)
+      this.isModalOpen = true
+      this.currentSection = section
+    }
+  }
 
   private async init(): Promise<void> {
-    const loading = await this.loadingController.create()
+    this.loaded = false
 
     try {
-      await loading.present()
       await this.fireService.loadConfig()
       await this.fireService.loadSections()
       this.profileImage = await this.fireService.getProfileImages()
-      console.log('this.profileImage: ', this.profileImage)
+
       combineLatest({
         config: this.globalService.config$,
         sections: this.globalService.sections$
@@ -54,7 +71,7 @@ export class HomePage {
         this.config = res.config
         this.sections = res.sections
 
-        loading.dismiss()
+        this.loaded = true
       })
 
     } catch (err) {

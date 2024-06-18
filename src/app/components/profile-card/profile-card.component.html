@@ -4,14 +4,18 @@
       <div class="avatar-flex" [ngClass]="orientation">
         <div class="avatar-left">
           <div class="avatar">
+            <img src="assets/profile-placeholder.jpg" fill [hidden]="loaded"/>
             <img
-              [ngSrc]="slot.logo"
               alt="Avatar"
-              fill="contain"
+              fill
+              priority
+              [hidden]="!loaded"
+              [ngSrc]="slot.logo"
               [ngStyle]="{
                 'object-fit': slot.fit,
                 'background-color': slot.color || 'transparent'
               }"
+              (load)="loaded = true"
             />
           </div>
           <div class="avatar-text">

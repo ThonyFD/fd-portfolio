@@ -3,6 +3,41 @@ hr {
   margin: 48px 0;
 }
 
+.sub-line {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+
+  span {
+    border-radius: 16px;
+    font-size: 14px;
+    margin-right: 4px;
+    padding: 6px 8px;
+  }
+  span.danger {
+    background-color: red;
+  }
+  span.medium {
+    opacity: .7;
+    background-color: var(--ion-color-light-tint);
+  }
+
+  .red-dot {
+    margin: 0;
+    font-size: 50px;
+    padding: 0;
+    line-height: 0;
+    vertical-align: middle;
+    position: relative;
+    top: 1px;
+    color: black;
+    animation-name: blackWhite;  
+    animation-iteration-count: infinite;  
+    animation-duration: 2s; 
+  }
+}
+
 .avatar-flex {
   display: flex;
   flex-wrap: nowrap;
@@ -18,6 +53,7 @@ hr {
     .avatar-text,
     .sub-title,
     .title {
+      margin-left: 0;
       text-align: center;
     }
   }
@@ -66,13 +102,6 @@ hr {
   }
 }
 
-.avatar-tags {
-  display: flex;
-  align-content: center;
-  flex-wrap: wrap;
-  padding-left: 8px;
-}
-
 .title {
   font-size: 1.2em;
 }
@@ -83,6 +112,13 @@ hr {
 
 .description {
   text-align: justify;
+}
+
+@keyframes blackWhite {  
+  0% { color: rgb(185, 0, 0); }
+  50% { color: rgb(185, 0, 0); }
+  51% { color: black; }
+  100% { color: black; }
 }
 
 @media only screen and (min-width: 200px) and (max-width: 540px) {
@@ -115,4 +151,8 @@ hr {
   .avatar-tags {
     justify-content: center;
   }
+}
+
+@media (prefers-color-scheme: dark) {
+
 }

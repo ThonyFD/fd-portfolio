@@ -8,12 +8,14 @@ import {Section} from "../../models/section";
   templateUrl: './profile-card.component.html',
   styleUrls: ['./profile-card.component.scss'],
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, IonicModule]
+  imports: [CommonModule, NgOptimizedImage, IonicModule],
 })
 export class ProfileCardComponent  implements OnInit {
 
   @Input('slot') slot: Section = {} as Section;
   @Input('orientation') orientation: string = 'horizontal';
+  
+  public loaded= false;
 
   ngOnInit() {}
 
