@@ -23,7 +23,7 @@
           <h2 class="sub-title" [innerHTML]="slot.subTitle"></h2>
           <h4 class="sub-line" *ngIf="slot.end && slot.start">
             <span *ngIf="slot.end?.toLowerCase() === 'now'" class="danger">
-              <span class="red-dot">&#8226;</span> CURRENT
+              <span class="red-dot">&#8226;</span> current
             </span>
             <span *ngIf="slot.end?.toLowerCase() !== 'now'" class="medium">{{ slot.end }}</span>
             <span class="medium">{{ slot.start }}</span>

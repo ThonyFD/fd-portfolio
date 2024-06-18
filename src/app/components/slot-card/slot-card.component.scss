@@ -16,7 +16,7 @@ hr {
     padding: 6px 8px;
   }
   span.danger {
-    background-color: red;
+    border: 1px solid black;
   }
   span.medium {
     opacity: .7;
@@ -34,7 +34,7 @@ hr {
     color: black;
     animation-name: blackWhite;  
     animation-iteration-count: infinite;  
-    animation-duration: 2s; 
+    animation-duration: 2s;
   }
 }
 
