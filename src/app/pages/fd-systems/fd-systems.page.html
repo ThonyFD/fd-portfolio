@@ -1,0 +1,169 @@
+<ion-content [fullscreen]="true" class="fds-content">
+
+  <!-- NAV -->
+  <nav class="fds-nav">
+    <div class="fds-nav__logo">
+      <img src="assets/fds-logo.png" alt="FD Systems" />
+    </div>
+    <div class="fds-nav__links">
+      <a href="#services">Servicios</a>
+      <a href="#why-us">Nosotros</a>
+      <a href="#contact">Contacto</a>
+    </div>
+    <ion-button class="fds-nav__cta" href="#contact" shape="round" size="small">
+      Hablemos
+    </ion-button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="fds-hero">
+    <div class="fds-hero__glow fds-hero__glow--blue"></div>
+    <div class="fds-hero__glow fds-hero__glow--orange"></div>
+
+    <div class="fds-hero__content">
+      <img src="assets/fds-logo.png" alt="FD Systems" class="fds-hero__logo" />
+
+      <h1 class="fds-hero__headline">
+        Software que impulsa <br />
+        <span class="fds-hero__headline--gradient">tu negocio hacia el futuro</span>
+      </h1>
+
+      <p class="fds-hero__sub">
+        Desarrollamos soluciones de software a medida e integramos inteligencia
+        artificial para automatizar procesos y acelerar el crecimiento de tu empresa.
+      </p>
+
+      <div class="fds-hero__actions">
+        <ion-button href="#contact" shape="round" size="large" class="fds-btn-primary">
+          Comienza tu proyecto
+          <ion-icon slot="end" name="arrow-forward"></ion-icon>
+        </ion-button>
+        <ion-button href="#services" shape="round" size="large" fill="outline" class="fds-btn-outline">
+          Ver servicios
+        </ion-button>
+      </div>
+    </div>
+
+    <div class="fds-hero__scroll-hint">
+      <span></span>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="fds-section fds-section--dark">
+    <div class="fds-section__inner">
+      <div class="fds-section__header">
+        <span class="fds-badge">Servicios</span>
+        <h2>Todo lo que necesitas para crecer digitalmente</h2>
+        <p>Desde una idea hasta un producto en producción, acompañamos cada etapa.</p>
+      </div>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col sizeLg="4" sizeMd="6" sizeXs="12" *ngFor="let svc of services">
+            <div class="fds-card">
+              <div class="fds-card__icon">
+                <ion-icon [name]="svc.icon"></ion-icon>
+              </div>
+              <h3 class="fds-card__title">{{ svc.title }}</h3>
+              <p class="fds-card__desc">{{ svc.description }}</p>
+              <div class="fds-card__tags">
+                <span class="fds-tag" *ngFor="let tag of svc.tags">{{ tag }}</span>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section id="why-us" class="fds-section fds-section--mid">
+    <div class="fds-section__inner">
+      <div class="fds-section__header">
+        <span class="fds-badge fds-badge--gold">¿Por qué FD Systems?</span>
+        <h2>Tecnología de punta, resultados reales</h2>
+        <p>Combinamos experiencia técnica con visión de negocio para entregarte soluciones que funcionan.</p>
+      </div>
+
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-col sizeLg="4" sizeMd="6" sizeXs="12" *ngFor="let d of differentiators">
+            <div class="fds-diff-card">
+              <div class="fds-diff-card__icon">
+                <ion-icon [name]="d.icon"></ion-icon>
+              </div>
+              <h3>{{ d.title }}</h3>
+              <p>{{ d.description }}</p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <div class="fds-tech">
+        <p class="fds-tech__label">Tecnologías que dominamos</p>
+        <div class="fds-tech__pills">
+          <span class="fds-tech__pill" *ngFor="let t of techStack">{{ t }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="fds-section fds-section--contact">
+    <div class="fds-hero__glow fds-hero__glow--blue fds-hero__glow--left"></div>
+    <div class="fds-hero__glow fds-hero__glow--orange fds-hero__glow--right"></div>
+
+    <div class="fds-section__inner fds-contact">
+      <img src="assets/fds-logo.png" alt="FD Systems" class="fds-contact__logo" />
+
+      <h2 class="fds-contact__headline">¿Tienes un proyecto en mente?</h2>
+      <p class="fds-contact__sub">
+        Cuéntanos tu idea y te ayudamos a convertirla en realidad.
+        Sin compromiso, primera consulta gratis.
+      </p>
+
+      <div class="fds-contact__actions">
+        <ion-button
+          href="https://api.whatsapp.com/send?l=es&phone=50765839292"
+          shape="round"
+          size="large"
+          class="fds-btn-whatsapp"
+          target="_blank"
+        >
+          <ion-icon slot="start" name="logo-whatsapp"></ion-icon>
+          Escríbenos por WhatsApp
+        </ion-button>
+        <ion-button
+          href="mailto:contact@fdsystems.dev"
+          shape="round"
+          size="large"
+          fill="outline"
+          class="fds-btn-outline"
+        >
+          <ion-icon slot="start" name="mail-outline"></ion-icon>
+          Enviar correo
+        </ion-button>
+      </div>
+
+      <div class="fds-contact__social">
+        <a href="https://www.linkedin.com/in/thonyfd/" target="_blank" aria-label="LinkedIn">
+          <ion-icon name="logo-linkedin"></ion-icon>
+        </a>
+        <a href="https://github.com/ThonyFD" target="_blank" aria-label="GitHub">
+          <ion-icon name="logo-github"></ion-icon>
+        </a>
+        <a href="https://api.whatsapp.com/send?l=es&phone=50765839292" target="_blank" aria-label="WhatsApp">
+          <ion-icon name="logo-whatsapp"></ion-icon>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="fds-footer">
+    <p>© {{ currentYear }} FD Systems. Todos los derechos reservados.</p>
+    <a routerLink="/" class="fds-footer__back">Ver portafolio personal →</a>
+  </footer>
+
+</ion-content>

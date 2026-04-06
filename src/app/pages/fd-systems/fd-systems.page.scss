@@ -1,0 +1,493 @@
+// ──────────────────────────────────────────────
+// FD Systems Landing — Styles
+// ──────────────────────────────────────────────
+
+$navy:      #08112b;
+$navy-mid:  #0d1e45;
+$navy-card: #111d3f;
+$blue:      #1a7eff;
+$cyan:      #00c8e0;
+$orange:    #ff8c00;
+$gold:      #ffd000;
+$white:     #ffffff;
+$muted:     rgba(255, 255, 255, 0.60);
+$border:    rgba(255, 255, 255, 0.08);
+
+@mixin gradient-text($from, $to) {
+  background: linear-gradient(90deg, $from, $to);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Content background
+.fds-content {
+  --background: #{$navy};
+  --color: #{$white};
+  font-family: 'Inter', 'SF Pro Display', system-ui, sans-serif;
+}
+
+// ── NAV ────────────────────────────────────────
+.fds-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 40px;
+  background: rgba($navy, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid $border;
+
+  &__logo img {
+    height: 38px;
+    object-fit: contain;
+  }
+
+  &__links {
+    display: flex;
+    gap: 32px;
+
+    a {
+      color: $muted;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+
+      &:hover { color: $white; }
+    }
+  }
+
+  &__cta {
+    --background: linear-gradient(90deg, #{$blue}, #{$cyan});
+    --border-radius: 999px;
+    --color: #{$white};
+    font-weight: 600;
+  }
+
+  @media (max-width: 600px) {
+    padding: 10px 16px;
+    &__links { display: none; }
+  }
+}
+
+// ── HERO ───────────────────────────────────────
+.fds-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px 100px;
+  overflow: hidden;
+
+  &__glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.25;
+    pointer-events: none;
+
+    &--blue {
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, $blue 0%, $cyan 60%, transparent 100%);
+      top: -200px;
+      left: -200px;
+    }
+
+    &--orange {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, $orange 0%, $gold 60%, transparent 100%);
+      bottom: -100px;
+      right: -100px;
+    }
+
+    &--left  { top: -100px; left: -150px; opacity: 0.2; }
+    &--right { bottom: -50px; right: -100px; opacity: 0.2; }
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+  }
+
+  &__logo {
+    width: 200px;
+    margin-bottom: 32px;
+    filter: drop-shadow(0 0 40px rgba($blue, 0.5));
+    animation: float 4s ease-in-out infinite;
+  }
+
+  &__headline {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: $white;
+    margin: 0 0 20px;
+    letter-spacing: -0.5px;
+
+    &--gradient {
+      @include gradient-text($cyan, $gold);
+    }
+  }
+
+  &__sub {
+    font-size: 1.1rem;
+    color: $muted;
+    line-height: 1.7;
+    max-width: 580px;
+    margin: 0 auto 40px;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  &__scroll-hint {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+
+    span {
+      display: block;
+      width: 24px;
+      height: 24px;
+      border-right: 2px solid $muted;
+      border-bottom: 2px solid $muted;
+      transform: rotate(45deg);
+      animation: scroll-hint 1.5s ease-in-out infinite;
+    }
+  }
+}
+
+// ── BUTTONS ────────────────────────────────────
+.fds-btn-primary {
+  --background: linear-gradient(90deg, #{$blue}, #{$cyan});
+  --border-radius: 999px;
+  --color: #{$white};
+  --box-shadow: 0 8px 32px rgba(26, 126, 255, 0.45);
+  font-weight: 700;
+}
+
+.fds-btn-outline {
+  --border-radius: 999px;
+  --color: #{$white};
+  --border-color: rgba(255, 255, 255, 0.35);
+  font-weight: 600;
+}
+
+.fds-btn-whatsapp {
+  --background: linear-gradient(90deg, #25d366, #1fba58);
+  --border-radius: 999px;
+  --color: #{$white};
+  font-weight: 700;
+}
+
+// ── SECTIONS ───────────────────────────────────
+.fds-section {
+  padding: 96px 24px;
+  position: relative;
+
+  &--dark    { background: $navy-mid; }
+  &--mid     { background: $navy; }
+  &--contact { background: $navy-mid; overflow: hidden; }
+
+  &__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 64px;
+
+    h2 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      color: $white;
+      margin: 12px 0 16px;
+    }
+
+    p {
+      color: $muted;
+      font-size: 1rem;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+  }
+}
+
+// ── BADGE ──────────────────────────────────────
+.fds-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: rgba($blue, 0.15);
+  color: $cyan;
+  border: 1px solid rgba($cyan, 0.3);
+
+  &--gold {
+    background: rgba($orange, 0.12);
+    color: $gold;
+    border-color: rgba($gold, 0.3);
+  }
+}
+
+// ── SERVICE CARDS ──────────────────────────────
+.fds-card {
+  background: $navy-card;
+  border: 1px solid $border;
+  border-radius: 16px;
+  padding: 32px 28px;
+  height: 100%;
+  margin: 8px 4px;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-6px);
+    border-color: rgba($cyan, 0.4);
+    box-shadow: 0 16px 40px rgba($blue, 0.2);
+  }
+
+  &__icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba($blue, 0.2), rgba($cyan, 0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+
+    ion-icon {
+      font-size: 24px;
+      color: $cyan;
+    }
+  }
+
+  &__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $white;
+    margin: 0 0 10px;
+  }
+
+  &__desc {
+    font-size: 0.9rem;
+    color: $muted;
+    line-height: 1.65;
+    margin: 0 0 20px;
+  }
+
+  &__tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+}
+
+.fds-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba($blue, 0.12);
+  color: rgba($cyan, 0.9);
+  border: 1px solid rgba($cyan, 0.2);
+}
+
+// ── DIFFERENTIATOR CARDS ───────────────────────
+.fds-diff-card {
+  text-align: center;
+  padding: 40px 28px;
+  border-radius: 16px;
+  border: 1px solid $border;
+  background: $navy-card;
+  margin: 8px 4px;
+  transition: border-color 0.25s ease;
+
+  &:hover { border-color: rgba($gold, 0.35); }
+
+  &__icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba($orange, 0.2), rgba($gold, 0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+
+    ion-icon {
+      font-size: 28px;
+      color: $gold;
+    }
+  }
+
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: $white;
+    margin: 0 0 10px;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: $muted;
+    line-height: 1.65;
+    margin: 0;
+  }
+}
+
+// ── TECH STACK ─────────────────────────────────
+.fds-tech {
+  margin-top: 72px;
+  text-align: center;
+
+  &__label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: $muted;
+    margin-bottom: 20px;
+  }
+
+  &__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  &__pill {
+    padding: 8px 20px;
+    border-radius: 999px;
+    border: 1px solid $border;
+    background: rgba($white, 0.04);
+    color: rgba($white, 0.75);
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: border-color 0.2s, background 0.2s;
+
+    &:hover {
+      border-color: rgba($cyan, 0.5);
+      background: rgba($cyan, 0.07);
+      color: $white;
+    }
+  }
+}
+
+// ── CONTACT ────────────────────────────────────
+.fds-contact {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+
+  &__logo {
+    width: 140px;
+    margin-bottom: 28px;
+    filter: drop-shadow(0 0 24px rgba($blue, 0.4));
+  }
+
+  &__headline {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    color: $white;
+    margin: 0 0 16px;
+  }
+
+  &__sub {
+    font-size: 1rem;
+    color: $muted;
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0 auto 44px;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  &__social {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+
+    a {
+      color: $muted;
+      text-decoration: none;
+      transition: color 0.2s, transform 0.2s;
+
+      &:hover { color: $white; transform: translateY(-2px); }
+
+      ion-icon { font-size: 26px; }
+    }
+  }
+}
+
+// ── FOOTER ─────────────────────────────────────
+.fds-footer {
+  background: $navy;
+  border-top: 1px solid $border;
+  padding: 24px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  p {
+    color: $muted;
+    font-size: 0.85rem;
+    margin: 0;
+  }
+
+  &__back {
+    color: $cyan;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.2s;
+
+    &:hover { opacity: 0.75; }
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+// ── ANIMATIONS ─────────────────────────────────
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes scroll-hint {
+  0%   { opacity: 1;   transform: rotate(45deg) translate(0, 0); }
+  50%  { opacity: 0.3; transform: rotate(45deg) translate(6px, 6px); }
+  100% { opacity: 1;   transform: rotate(45deg) translate(0, 0); }
+}
