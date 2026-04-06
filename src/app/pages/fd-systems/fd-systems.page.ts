@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { IonContent, IonicModule } from '@ionic/angular';
 
 interface Service {
   icon: string;
@@ -24,6 +24,8 @@ interface Differentiator {
   imports: [CommonModule, IonicModule, RouterModule]
 })
 export class FdSystemsPage {
+
+  @ViewChild(IonContent) content!: IonContent;
 
   currentYear = new Date().getFullYear();
 
@@ -85,4 +87,11 @@ export class FdSystemsPage {
   ];
 
   techStack: string[] = ['Angular', 'React', 'Node.js', 'TypeScript', 'Python', 'Firebase', 'AWS', 'Docker', 'PostgreSQL'];
+
+  async scrollTo(sectionId: string): Promise<void> {
+    const el = document.getElementById(sectionId);
+    if (!el) return;
+    const offset = el.offsetTop - 60;
+    this.content.scrollToPoint(0, offset, 500);
+  }
 }

@@ -6,11 +6,11 @@
       <img src="assets/fds-logo.png" alt="FD Systems" />
     </div>
     <div class="fds-nav__links">
-      <a href="#services">Servicios</a>
-      <a href="#why-us">Nosotros</a>
-      <a href="#contact">Contacto</a>
+      <a (click)="scrollTo('services')">Servicios</a>
+      <a (click)="scrollTo('why-us')">Nosotros</a>
+      <a (click)="scrollTo('contact')">Contacto</a>
     </div>
-    <ion-button class="fds-nav__cta" href="#contact" shape="round" size="small">
+    <ion-button class="fds-nav__cta" (click)="scrollTo('contact')" shape="round" size="small">
       Hablemos
     </ion-button>
   </nav>
@@ -34,17 +34,17 @@
       </p>
 
       <div class="fds-hero__actions">
-        <ion-button href="#contact" shape="round" size="large" class="fds-btn-primary">
+        <ion-button (click)="scrollTo('contact')" shape="round" size="large" class="fds-btn-primary">
           Comienza tu proyecto
           <ion-icon slot="end" name="arrow-forward"></ion-icon>
         </ion-button>
-        <ion-button href="#services" shape="round" size="large" fill="outline" class="fds-btn-outline">
+        <ion-button (click)="scrollTo('services')" shape="round" size="large" fill="outline" class="fds-btn-outline">
           Ver servicios
         </ion-button>
       </div>
     </div>
 
-    <div class="fds-hero__scroll-hint">
+    <div class="fds-hero__scroll-hint" (click)="scrollTo('services')">
       <span></span>
     </div>
   </section>

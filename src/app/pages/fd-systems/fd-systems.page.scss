@@ -54,6 +54,7 @@ $border:    rgba(255, 255, 255, 0.08);
       text-decoration: none;
       font-size: 0.9rem;
       font-weight: 500;
+      cursor: pointer;
       transition: color 0.2s;
 
       &:hover { color: $white; }
