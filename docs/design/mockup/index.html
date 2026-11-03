@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anthony Mosquera · Solutions Architect · AI Systems Engineer</title>
+<meta name="description" content="Solutions Architect and AI Systems Engineer in Panama City. Designs AI agent systems and runs them in production. Open to remote roles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --carmine: #9c1220;
+  --carmine-ink: #ffffff;
+  --carmine-muted: #f6c9cc;
+  --pink: #ffd9dc;
+  --navy: #0b2341;
+  --navy-ink: #ffffff;
+  --navy-muted: #a9b9cf;
+  --navy-surface: #12305a;
+  --bg: #f7f7f5;
+  --ink: #141414;
+  --muted: #555555;
+  --surface: #ebebe8;
+  --foot-name: #9c1220;
+  --margin: clamp(16px, 2vw, 32px);
+  --step-small: 1rem;
+  --step-body: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-head: clamp(2.75rem, 1.6rem + 3.9vw, 5rem);
+  --display: "Roboto Flex", "Roboto", system-ui, sans-serif;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --carmine: #8a101c;
+  --navy: #081a31;
+  --navy-surface: #0f2849;
+  --bg: #0f0f10;
+  --ink: #f2f2f0;
+  --muted: #b3b3b0;
+  --surface: #1c1c1e;
+  --foot-name: #ff8a94;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --carmine: #8a101c;
+    --navy: #081a31;
+    --navy-surface: #0f2849;
+    --bg: #0f0f10;
+    --ink: #f2f2f0;
+    --muted: #b3b3b0;
+    --surface: #1c1c1e;
+    --foot-name: #ff8a94;
+    color-scheme: dark;
+  }
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Roboto", system-ui, sans-serif;
+  font-size: var(--step-body);
+  line-height: 1.55;
+}
+a { color: inherit; }
+img { display: block; max-width: 100%; height: auto; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: var(--margin); top: var(--margin); background: var(--pink); color: var(--carmine); padding: 8px 12px; z-index: 10; }
+
+/* Hero: carmine field, name across the middle, four corners */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  background: var(--carmine);
+  color: var(--carmine-ink);
+  padding: var(--margin);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr auto;
+  overflow: hidden;
+}
+.hero__intro { max-width: 34ch; }
+.hero__role { margin: 0 0 6px; font-size: var(--step-lead); line-height: 1.3; font-weight: 400; }
+.hero__sentence { margin: 0; font-size: var(--step-body); color: var(--carmine-muted); }
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  background: var(--pink);
+  color: var(--carmine);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 12px 22px;
+  border-radius: 0;
+  transition: transform .18s var(--ease), background-color .18s var(--ease);
+}
+.btn:hover { background: #ffffff; transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+.hero__nav { display: flex; gap: 22px; font-size: var(--step-small); align-self: start; }
+.hero__nav a, .hero__corner a { text-decoration: none; transition: color .15s; }
+.hero__nav a:hover, .hero__corner a:hover { color: var(--pink); text-decoration: underline; text-underline-offset: 4px; }
+.hero__name {
+  grid-column: 1 / -1;
+  align-self: center;
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 250;
+  font-variation-settings: "opsz" 144, "wdth" 125;
+  font-size: calc((100vw - 2 * var(--margin)) / 8.2);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  transform-origin: 50% 50%;
+}
+.hero__corner { display: flex; gap: 22px; font-size: var(--step-small); align-items: baseline; }
+.hero__corner--right { justify-self: end; }
+.hero__corner p { margin: 0; }
+
+/* Archive band */
+.band { margin: 0; background: var(--navy); }
+.band img { width: 100%; aspect-ratio: 1920 / 304; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+.band { overflow: hidden; }
+.band img { transform: scale(1.08); transition: transform 8s linear; }
+.band.in img { transform: scale(1); }
+.band figcaption { color: var(--navy-muted); font-size: var(--step-small); padding: 10px var(--margin) 0; max-width: 60ch; }
+
+/* AI experience: big names, fixed preview */
+.ai {
+  background: var(--navy);
+  color: var(--navy-ink);
+  padding: 120px var(--margin) 160px;
+}
+.ai__head { display: grid; grid-template-columns: 8fr 4fr; gap: 32px; align-items: end; margin-bottom: 48px; }
+.ai h2 { margin: 0; font-size: 1.75rem; font-weight: 400; line-height: 1.15; }
+.ai__note { margin: 0; color: var(--navy-muted); font-size: var(--step-body); max-width: 40ch; }
+.ai__grid { display: grid; grid-template-columns: 8fr 4fr; gap: 32px; align-items: start; }
+.ai__names { list-style: none; margin: 0; padding: 0; }
+.ai__item { display: contents; }
+.ai__name {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 20px;
+  width: 100%;
+  padding: 10px 0;
+  background: none; border: 0; text-align: left; cursor: pointer;
+  color: var(--navy-muted);
+  font: inherit;
+}
+.ai__title {
+  font-family: var(--display);
+  font-size: var(--step-head);
+  font-weight: 300;
+  font-variation-settings: "opsz" 96, "wdth" 100;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  transition: color .2s var(--ease);
+}
+.ai__meta { font-size: var(--step-small); color: var(--navy-muted); }
+.ai__name[aria-selected="true"] .ai__title,
+.ai__name:hover .ai__title,
+.ai__name:focus-visible .ai__title { color: var(--navy-ink); }
+.ai__name[aria-selected="true"] .ai__meta { color: var(--pink); }
+
+.ai__frame { position: sticky; top: 12vh; display: grid; }
+.panel {
+  grid-area: 1 / 1;
+  background: var(--navy-surface);
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s var(--ease), visibility .2s;
+}
+.panel.is-active { opacity: 1; visibility: visible; }
+.panel h3 { margin: 0 0 8px; font-size: var(--step-lead); font-weight: 400; line-height: 1.2; }
+.panel__summary { margin: 0 0 18px; font-size: 1.0625rem; line-height: 1.5; }
+.panel__tags { margin: 14px 0 0; font-size: var(--step-small); color: var(--navy-muted); }
+.panel__link { display: inline-block; margin-top: 10px; font-size: var(--step-small); color: var(--pink); }
+
+/* The locks: each stage is a chamber one step lower than the last */
+.locks { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.lock {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  background: #0a1d36;
+  padding: 12px 14px;
+  font-size: 1rem;
+  line-height: 1.35;
+  transition: background-color .25s var(--ease), color .25s var(--ease);
+}
+.lock:nth-child(2) { margin-left: 10px; }
+.lock:nth-child(3) { margin-left: 20px; }
+.lock:nth-child(4) { margin-left: 30px; }
+.lock:nth-child(5) { margin-left: 40px; }
+.lock:nth-child(6) { margin-left: 50px; }
+.lock b { font-weight: 500; }
+.lock span { color: var(--navy-muted); font-size: 0.9375rem; }
+.lock.is-lit { background: var(--pink); color: var(--carmine); }
+.lock.is-lit span { color: var(--carmine); }
+.trace {
+  margin-top: 14px;
+  background: var(--pink); color: var(--carmine);
+  border: 0; border-radius: 0; cursor: pointer;
+  font: inherit; font-size: 0.9375rem; font-weight: 500;
+  padding: 10px 16px;
+  transition: transform .18s var(--ease), background-color .18s;
+}
+.trace:hover { background: #fff; transform: translateY(-2px); }
+.trace:active { transform: translateY(0); }
+.trace__status { display: block; margin-top: 8px; font-size: 0.9375rem; color: var(--navy-muted); min-height: 1.4em; }
+
+/* Where: photo + aerial */
+.where { padding: 160px var(--margin); display: grid; grid-template-columns: 4fr 5fr 3fr; gap: 32px; align-items: end; }
+.where h2 { margin: 0 0 16px; font-size: 1.75rem; font-weight: 400; line-height: 1.15; }
+.where p { margin: 0 0 14px; max-width: 34ch; }
+.where figure { margin: 0; }
+.where figcaption { font-size: var(--step-small); color: var(--muted); margin-top: 8px; }
+.where__portrait img { aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; width: 100%; }
+.where__aerial img { aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+.facts { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 14px; font-size: var(--step-small); }
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; }
+
+/* Footer bracket */
+.foot { background: var(--bg); color: var(--ink); padding: 120px var(--margin) var(--margin); }
+.foot__invite { margin: 0 0 24px; font-size: var(--step-lead); max-width: 30ch; line-height: 1.3; }
+.foot__name { display: block; font-family: var(--display); font-weight: 250; font-variation-settings: "opsz" 144, "wdth" 125; font-size: calc((100vw - 2 * var(--margin)) / 8.2); letter-spacing: -0.03em; line-height: 1; white-space: nowrap; color: var(--foot-name); text-decoration: none; }
+.foot__credits { margin: 32px 0 0; font-size: var(--step-small); color: var(--muted); max-width: 70ch; }
+
+/* Entrances */
+.rise { opacity: 0; transform: translateY(24px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.rise.in { opacity: 1; transform: none; }
+.no-js .rise { opacity: 1; transform: none; }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; grid-template-rows: auto auto auto 1fr auto; gap: 18px; }
+  .hero__nav { order: -1; justify-self: start; }
+  .hero__name { align-self: start; margin-top: 8vh; }
+  .hero__intro { max-width: none; }
+  .hero .btn { display: block; text-align: center; }
+  .hero__shot { display: block; margin: 0 calc(var(--margin) * -1); }
+  .hero__shot img { aspect-ratio: 4 / 5; width: 100%; object-fit: cover; object-position: 50% 30%; }
+  .hero__corner--right { justify-self: start; }
+  .ai { padding: 96px var(--margin) 120px; }
+  .ai__head, .ai__grid { grid-template-columns: 1fr; }
+  .ai__frame { display: none; }
+  .ai__item { display: block; margin-bottom: 40px; }
+  .ai__item .panel { display: block; opacity: 1; visibility: visible; margin-bottom: 14px; }
+  .ai__name { padding: 0; }
+  .ai__title { font-size: 9.5vw; color: var(--navy-ink); }
+  .where { grid-template-columns: 1fr 1fr; padding: 120px var(--margin); }
+  .where > div { grid-column: 1 / -1; }
+  .where p { max-width: 60ch; }
+}
+@media (min-width: 861px) {
+  .hero__shot { display: none; }
+  .ai__item .panel { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise { opacity: 1; transform: none; transition: none; }
+  .hero__name { transform: none !important; }
+  .lock, .btn, .trace { transition: none; }
+}
+</style>
+</head>
+<body class="no-js">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hero">
+  <div class="hero__intro">
+    <p class="hero__role rise">Solutions Architect and AI Systems Engineer</p>
+    <p class="hero__sentence rise">I design AI agent systems and run them in production. Open to remote roles.</p>
+    <a class="btn rise" href="mailto:fdsystems.fd@gmail.com?subject=Role%20for%20Anthony%20Mosquera">Email me</a>
+  </div>
+  <nav class="hero__nav" aria-label="Sections">
+    <a href="#ai-experience">AI work</a>
+    <a href="#experience">Experience</a>
+    <a href="/resume.md">Resume</a>
+    <a href="/es" hreflang="es" lang="es">Español</a>
+  </nav>
+  <h1 class="hero__name" id="wordmark">Anthony Mosquera</h1>
+  <figure class="hero__shot" aria-hidden="true">
+    <img src="assets/fmib-38689-testing-the-emergency-dam-gatun.jpg" alt="" width="1289" height="830">
+  </figure>
+  <div class="hero__corner"><p>Panama City · GMT-5 · English and Spanish</p></div>
+  <div class="hero__corner hero__corner--right">
+    <a href="https://www.linkedin.com/in/thonyfd/">LinkedIn</a>
+    <a href="https://github.com/ThonyFD">GitHub</a>
+  </div>
+</header>
+
+<main id="main">
+  <figure class="band rise">
+    <img src="assets/panama-canal-gatun-locks-1913.jpg" alt="Panorama of the Gatun Locks under construction, Panama Canal, about 1913" width="1920" height="304">
+    <figcaption>Gatun Locks, Panama Canal, about 1913. Ships rise and fall through one chamber at a time; so do the events below.</figcaption>
+  </figure>
+
+  <section class="ai" id="ai-experience" aria-labelledby="ai-h">
+    <div class="ai__head">
+      <h2 id="ai-h" class="rise">AI experience</h2>
+      <p class="ai__note rise">Five systems built in 2026. Pick one and send a test event through its stages.</p>
+    </div>
+    <div class="ai__grid">
+      <ul class="ai__names" role="tablist" aria-label="AI projects">
+        <li class="ai__item rise">
+          <article class="panel is-active" id="p-datacentria" role="tabpanel" aria-labelledby="t-datacentria" data-ui>
+            <h3>AI omnichannel agent backend</h3>
+            <p class="panel__summary">Event-driven middleware that connects conversational agents in GHL AI Studio with the GoHighLevel CRM, built for DATACENTRIA through FD Systems.</p>
+            <ol class="locks">
+              <li class="lock"><b>Agent message</b><span>GHL AI Studio posts to /webhooks</span></li>
+              <li class="lock"><b>webhook-ingest</b><span>HMAC check, dedup, S3 archive</span></li>
+              <li class="lock"><b>SQS queue</b><span>Retries, dead-letter queue on failure</span></li>
+              <li class="lock"><b>event-processor</b><span>Conversation state in DynamoDB</span></li>
+              <li class="lock"><b>CRM writeback</b><span>Tags, fields, notes, tasks, opportunities</span></li>
+            </ol>
+            <button class="trace" type="button">Send a test event</button>
+            <span class="trace__status" aria-live="polite"></span>
+            <p class="panel__tags">AWS SAM · 8 Lambda functions · SQS · 7 DynamoDB tables · TypeScript · Node.js 22</p>
+          </article>
+          <button class="ai__name" role="tab" id="t-datacentria" aria-controls="p-datacentria" aria-selected="true">
+            <span class="ai__title">Datacentria</span><span class="ai__meta">Agent middleware · 2026</span>
+          </button>
+        </li>
+        <li class="ai__item rise">
+          <article class="panel" id="p-finance" role="tabpanel" aria-labelledby="t-finance" data-ui>
+            <h3>AI finance agent</h3>
+            <p class="panel__summary">A serverless agent that watches Gmail for financial transactions, extracts the key data with Gemini and feeds a React dashboard.</p>
+            <ol class="locks">
+              <li class="lock"><b>Gmail push</b><span>New mail notification, polling as fallback</span></li>
+              <li class="lock"><b>Ingestor</b><span>Cloud Run service reads the message</span></li>
+              <li class="lock"><b>Gemini extraction</b><span>Amount, merchant, date, account</span></li>
+              <li class="lock"><b>Monitor and renew</b><span>Health checks, token auto-renewal</span></li>
+              <li class="lock"><b>Dashboard</b><span>React view of every transaction</span></li>
+            </ol>
+            <button class="trace" type="button">Send a test event</button>
+            <span class="trace__status" aria-live="polite"></span>
+            <p class="panel__tags">Google Cloud Run · Gemini · Gmail API · React · TypeScript</p>
+            <a class="panel__link" href="https://github.com/ThonyFD/personal-dashboard">View code on GitHub</a>
+          </article>
+          <button class="ai__name" role="tab" id="t-finance" aria-controls="p-finance" aria-selected="false">
+            <span class="ai__title">AI Finance Agent</span><span class="ai__meta">Gemini agent · 2026</span>
+          </button>
+        </li>
+        <li class="ai__item rise">
+          <article class="panel" id="p-jobs" role="tabpanel" aria-labelledby="t-jobs" data-ui>
+            <h3>AI job scraper</h3>
+            <p class="panel__summary">An Apify Actor that opens a sandbox with Claude Code, Codex CLI and OpenCode ready to run a job search built from a candidate profile.</p>
+            <ol class="locks">
+              <li class="lock"><b>Candidate profile</b><span>Markdown profile picked at run time</span></li>
+              <li class="lock"><b>Prompt assembly</b><span>Discovery prompt plus persistence rules</span></li>
+              <li class="lock"><b>Agent sandbox</b><span>Claude Code, Codex CLI, OpenCode</span></li>
+              <li class="lock"><b>Control surface</b><span>MCP, REST API or browser shell</span></li>
+              <li class="lock"><b>Results</b><span>Matching roles saved to Notion</span></li>
+            </ol>
+            <button class="trace" type="button">Send a test event</button>
+            <span class="trace__status" aria-live="polite"></span>
+            <p class="panel__tags">Apify · Model Context Protocol · Claude Code · Codex · TypeScript</p>
+          </article>
+          <button class="ai__name" role="tab" id="t-jobs" aria-controls="p-jobs" aria-selected="false">
+            <span class="ai__title">AI Job Scraper</span><span class="ai__meta">MCP and coding agents · 2026</span>
+          </button>
+        </li>
+        <li class="ai__item rise">
+          <article class="panel" id="p-swarm" role="tabpanel" aria-labelledby="t-swarm" data-ui>
+            <h3>Agent-driven engineering</h3>
+            <p class="panel__summary">A harness of six coordinated agents that carries each change from spec to release, based on Robert C. Martin's (Uncle Bob) Swarm Forge model. Shipped an Android widget this way, and the same method runs my other projects.</p>
+            <ol class="locks">
+              <li class="lock"><b>Specifier</b><span>BDD scenarios, confirmed by a human</span></li>
+              <li class="lock"><b>Coder</b><span>Strict TDD, red, green, refactor</span></li>
+              <li class="lock"><b>Cleaner</b><span>Removes duplication, checks CRAP score</span></li>
+              <li class="lock"><b>Architect</b><span>Module boundaries, Clean Architecture</span></li>
+              <li class="lock"><b>Reviewer</b><span>Mutation testing with Pitest</span></li>
+              <li class="lock"><b>QA</b><span>Acceptance tests against the spec</span></li>
+            </ol>
+            <button class="trace" type="button">Send a test event</button>
+            <span class="trace__status" aria-live="polite"></span>
+            <p class="panel__tags">Claude Code agents · Git worktrees · TDD · Kotlin · quality gates. Based on Swarm Forge by Robert C. Martin.</p>
+          </article>
+          <button class="ai__name" role="tab" id="t-swarm" aria-controls="p-swarm" aria-selected="false">
+            <span class="ai__title">AI Multi Agent Harness</span><span class="ai__meta">Agentic SDLC · 2026</span>
+          </button>
+        </li>
+        <li class="ai__item rise">
+          <article class="panel" id="p-runner" role="tabpanel" aria-labelledby="t-runner" data-ui>
+            <h3>Multi-agent simulation</h3>
+            <p class="panel__summary">Google ADK agents that share tools over remote MCP and delegate to each other over A2A. A community workshop adapted from aaronthewarrior's Cloud Runner 2049.</p>
+            <ol class="locks">
+              <li class="lock"><b>Google ADK agents</b><span>Gemini models in Python</span></li>
+              <li class="lock"><b>Remote MCP</b><span>Shared tools over the network</span></li>
+              <li class="lock"><b>A2A</b><span>Agents delegate to agents</span></li>
+            </ol>
+            <button class="trace" type="button">Send a test event</button>
+            <span class="trace__status" aria-live="polite"></span>
+            <p class="panel__tags">Google ADK · MCP · A2A · Gemini · Python. Base repository by aaronthewarrior.</p>
+          </article>
+          <button class="ai__name" role="tab" id="t-runner" aria-controls="p-runner" aria-selected="false">
+            <span class="ai__title">Agent Mesh Lab</span><span class="ai__meta">Community workshop · 2026</span>
+          </button>
+        </li>
+      </ul>
+      <div class="ai__frame" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="where" id="experience" aria-labelledby="where-h">
+    <div class="rise">
+      <h2 id="where-h">Seventeen years of systems</h2>
+      <p>From Telefónica and Banistmo to Banca Móvil, the most used banking app in Panama, and Yappy, then Tigo, Cox and Banco Aliado. Today I am Solutions Architect at ASSA.</p>
+      <dl class="facts">
+        <div class="rise"><dt>Based in</dt><dd>Panama City, GMT-5</dd></div>
+        <div class="rise"><dt>Works</dt><dd>Remote, English and Spanish</dd></div>
+        <div class="rise"><dt>Reach me</dt><dd><a href="mailto:fdsystems.fd@gmail.com">fdsystems.fd@gmail.com</a></dd></div>
+      </dl>
+    </div>
+    <figure class="where__aerial rise">
+      <img src="assets/gatun-locks-looking-toward-atlantic-entrance-of.jpg" alt="Tugs, dredges and barges waiting in the Gatun Locks, looking toward the Atlantic entrance, about 1913" width="1024" height="821" loading="lazy">
+      <figcaption>Gatun Locks toward the Atlantic, about 1913.</figcaption>
+    </figure>
+    <figure class="where__portrait rise">
+      <img src="assets/profile.png" alt="Anthony Mosquera" width="704" height="1472" loading="lazy">
+      <figcaption>Anthony Mosquera.</figcaption>
+    </figure>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="foot__invite rise">Hiring for AI systems, remote? Write to me.</p>
+  <a class="foot__name rise" href="mailto:fdsystems.fd@gmail.com">Anthony Mosquera</a>
+  <p class="foot__credits rise">Photographs, all public domain via Wikimedia Commons: "Panama Canal Gatun Locks 1913" by the Isthmian Historical Society; "Testing the Emergency Dam, Gatun Locks" by Ernest Hallen; "Gatun locks looking toward Atlantic entrance of canal" by the Byron Company.</p>
+</footer>
+
+<script>
+(() => {
+  document.body.classList.remove('no-js');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const theme = new URLSearchParams(location.search).get('theme');
+  if (theme) document.documentElement.dataset.theme = theme;
+
+  // Entrances, staggered per section
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const siblings = [...e.target.parentElement.querySelectorAll(':scope > .rise')];
+      e.target.style.transitionDelay = `${Math.max(0, siblings.indexOf(e.target)) * 80}ms`;
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.rise').forEach((el) => io.observe(el));
+
+  // Fit the name to the full measure once the font is loaded
+  const fit = () => document.querySelectorAll('.hero__name, .foot__name').forEach((el) => {
+    el.style.fontSize = '';
+    const box = el.parentElement;
+    const cs = getComputedStyle(box);
+    const avail = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    const textWidth = range.getBoundingClientRect().width;
+    const size = parseFloat(getComputedStyle(el).fontSize);
+    el.style.fontSize = `${Math.floor(size * (avail / textWidth) * 10) / 10}px`;
+  });
+  document.fonts.ready.then(fit);
+  addEventListener('resize', fit);
+
+  // Scaling wordmark: shrinks slightly as the first screen leaves
+  const mark = document.getElementById('wordmark');
+  if (!reduce) {
+    addEventListener('scroll', () => {
+      const p = Math.min(1, scrollY / innerHeight);
+      mark.style.transform = `scale(${1 - p * 0.07})`;
+    }, { passive: true });
+  }
+
+  // Tabs: desktop moves the active panel into the sticky frame
+  const frame = document.querySelector('.ai__frame');
+  const tabs = [...document.querySelectorAll('.ai__name')];
+  const panels = tabs.map((t) => document.getElementById(t.getAttribute('aria-controls')));
+  const desktop = matchMedia('(min-width: 861px)');
+  const place = () => panels.forEach((p, i) => {
+    if (desktop.matches) frame.appendChild(p);
+    else tabs[i].after(p);
+  });
+  frame.removeAttribute('aria-hidden');
+  place();
+  desktop.addEventListener('change', place);
+  const select = (i) => tabs.forEach((t, j) => {
+    t.setAttribute('aria-selected', String(i === j));
+    t.tabIndex = i === j ? 0 : -1;
+    panels[j].classList.toggle('is-active', i === j);
+  });
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => select(i));
+    t.addEventListener('mouseenter', () => desktop.matches && select(i));
+    t.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+      e.preventDefault();
+      const n = (i + (e.key === 'ArrowDown' ? 1 : -1) + tabs.length) % tabs.length;
+      tabs[n].focus();
+      select(n);
+    });
+  });
+  select(0);
+
+  // The live thing: an event passes through each lock in turn
+  document.querySelectorAll('.trace').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const panel = btn.closest('.panel');
+      const locks = [...panel.querySelectorAll('.lock')];
+      const status = panel.querySelector('.trace__status');
+      btn.disabled = true;
+      locks.forEach((l) => l.classList.remove('is-lit'));
+      locks.forEach((l, i) => setTimeout(() => {
+        l.classList.add('is-lit');
+        status.textContent = `Stage ${i + 1} of ${locks.length}: ${l.querySelector('b').textContent}`;
+        if (i === locks.length - 1) {
+          setTimeout(() => { status.textContent = 'Delivered.'; btn.disabled = false; }, 400);
+        }
+      }, reduce ? 0 : i * 450));
+    });
+  });
+})();
+</script>
+</body>
+</html>
