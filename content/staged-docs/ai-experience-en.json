@@ -1,0 +1,208 @@
+{
+  "visible": false,
+  "staged": true,
+  "locale": "en",
+  "order": 0.25,
+  "hasHeading": true,
+  "label": "AI Experience",
+  "icon": "sparkles-outline",
+  "orientation": "",
+  "isHead": false,
+  "slots": [
+    {
+      "order": 0,
+      "title": "Datacentria",
+      "subTitle": "Agent middleware",
+      "label": "AI omnichannel agent backend",
+      "start": "2026",
+      "summary": "Event-driven middleware that connects conversational agents in GHL AI Studio with the GoHighLevel CRM, built for DATACENTRIA through FD Systems.",
+      "stages": [
+        {
+          "name": "Agent message",
+          "detail": "GHL AI Studio posts to /webhooks"
+        },
+        {
+          "name": "webhook-ingest",
+          "detail": "HMAC check, dedup, S3 archive"
+        },
+        {
+          "name": "SQS queue",
+          "detail": "Retries, dead-letter queue on failure"
+        },
+        {
+          "name": "event-processor",
+          "detail": "Conversation state in DynamoDB"
+        },
+        {
+          "name": "CRM writeback",
+          "detail": "Tags, fields, notes, tasks, opportunities"
+        }
+      ],
+      "tags": [
+        "AWS SAM",
+        "8 Lambda functions",
+        "SQS",
+        "7 DynamoDB tables",
+        "TypeScript",
+        "Node.js 22"
+      ],
+      "slots": []
+    },
+    {
+      "order": 1,
+      "title": "AI Finance Agent",
+      "subTitle": "Gemini agent",
+      "label": "AI finance agent",
+      "start": "2026",
+      "summary": "A serverless agent that watches Gmail for financial transactions, extracts the key data with Gemini and feeds a React dashboard.",
+      "stages": [
+        {
+          "name": "Gmail push",
+          "detail": "New mail notification, polling as fallback"
+        },
+        {
+          "name": "Ingestor",
+          "detail": "Cloud Run service reads the message"
+        },
+        {
+          "name": "Gemini extraction",
+          "detail": "Amount, merchant, date, account"
+        },
+        {
+          "name": "Monitor and renew",
+          "detail": "Health checks, token auto-renewal"
+        },
+        {
+          "name": "Dashboard",
+          "detail": "React view of every transaction"
+        }
+      ],
+      "tags": [
+        "Google Cloud Run",
+        "Gemini",
+        "Gmail API",
+        "React",
+        "TypeScript"
+      ],
+      "links": [
+        {
+          "label": "View code on GitHub",
+          "url": "https://github.com/ThonyFD/personal-dashboard"
+        }
+      ],
+      "slots": []
+    },
+    {
+      "order": 2,
+      "title": "AI Job Scraper",
+      "subTitle": "MCP and coding agents",
+      "label": "AI job scraper",
+      "start": "2026",
+      "summary": "An Apify Actor that opens a sandbox with Claude Code, Codex CLI and OpenCode ready to run a job search built from a candidate profile.",
+      "stages": [
+        {
+          "name": "Candidate profile",
+          "detail": "Markdown profile picked at run time"
+        },
+        {
+          "name": "Prompt assembly",
+          "detail": "Discovery prompt plus persistence rules"
+        },
+        {
+          "name": "Agent sandbox",
+          "detail": "Claude Code, Codex CLI, OpenCode"
+        },
+        {
+          "name": "Control surface",
+          "detail": "MCP, REST API or browser shell"
+        },
+        {
+          "name": "Results",
+          "detail": "Matching roles saved to Notion"
+        }
+      ],
+      "tags": [
+        "Apify",
+        "Model Context Protocol",
+        "Claude Code",
+        "Codex",
+        "TypeScript"
+      ],
+      "slots": []
+    },
+    {
+      "order": 3,
+      "title": "AI Multi Agent Harness",
+      "subTitle": "Agentic SDLC",
+      "label": "Agent-driven engineering",
+      "start": "2026",
+      "summary": "A harness of six coordinated agents that carries each change from spec to release, based on Robert C. Martin's (Uncle Bob) Swarm Forge model. Shipped an Android widget this way, and the same method runs my other projects.",
+      "stages": [
+        {
+          "name": "Specifier",
+          "detail": "BDD scenarios, confirmed by a human"
+        },
+        {
+          "name": "Coder",
+          "detail": "Strict TDD, red, green, refactor"
+        },
+        {
+          "name": "Cleaner",
+          "detail": "Removes duplication, checks CRAP score"
+        },
+        {
+          "name": "Architect",
+          "detail": "Module boundaries, Clean Architecture"
+        },
+        {
+          "name": "Reviewer",
+          "detail": "Mutation testing with Pitest"
+        },
+        {
+          "name": "QA",
+          "detail": "Acceptance tests against the spec"
+        }
+      ],
+      "tags": [
+        "Claude Code agents",
+        "Git worktrees",
+        "TDD",
+        "Kotlin",
+        "Quality gates",
+        "Based on Swarm Forge by Robert C. Martin"
+      ],
+      "slots": []
+    },
+    {
+      "order": 4,
+      "title": "Agent Mesh Lab",
+      "subTitle": "Community workshop",
+      "label": "Multi-agent simulation",
+      "start": "2026",
+      "summary": "Google ADK agents that share tools over remote MCP and delegate to each other over A2A. A community workshop adapted from aaronthewarrior's Cloud Runner 2049.",
+      "stages": [
+        {
+          "name": "Google ADK agents",
+          "detail": "Gemini models in Python"
+        },
+        {
+          "name": "Remote MCP",
+          "detail": "Shared tools over the network"
+        },
+        {
+          "name": "A2A",
+          "detail": "Agents delegate to agents"
+        }
+      ],
+      "tags": [
+        "Google ADK",
+        "MCP",
+        "A2A",
+        "Gemini",
+        "Python",
+        "Base repository by aaronthewarrior"
+      ],
+      "slots": []
+    }
+  ]
+}

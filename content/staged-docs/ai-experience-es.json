@@ -1,0 +1,208 @@
+{
+  "visible": false,
+  "staged": true,
+  "locale": "es",
+  "order": 0.25,
+  "hasHeading": true,
+  "label": "Experiencia con IA",
+  "icon": "sparkles-outline",
+  "orientation": "",
+  "isHead": false,
+  "slots": [
+    {
+      "order": 0,
+      "title": "Datacentria",
+      "subTitle": "Middleware de agentes",
+      "label": "Backend omnicanal de agentes de IA",
+      "start": "2026",
+      "summary": "Middleware orientado a eventos que conecta agentes conversacionales de GHL AI Studio con el CRM GoHighLevel, construido para DATACENTRIA a través de FD Systems.",
+      "stages": [
+        {
+          "name": "Mensaje del agente",
+          "detail": "GHL AI Studio envía a /webhooks"
+        },
+        {
+          "name": "webhook-ingest",
+          "detail": "Validación HMAC, deduplicación, archivo en S3"
+        },
+        {
+          "name": "Cola SQS",
+          "detail": "Reintentos y cola de mensajes fallidos"
+        },
+        {
+          "name": "event-processor",
+          "detail": "Estado de la conversación en DynamoDB"
+        },
+        {
+          "name": "Escritura en el CRM",
+          "detail": "Etiquetas, campos, notas, tareas, oportunidades"
+        }
+      ],
+      "tags": [
+        "AWS SAM",
+        "8 funciones Lambda",
+        "SQS",
+        "7 tablas DynamoDB",
+        "TypeScript",
+        "Node.js 22"
+      ],
+      "slots": []
+    },
+    {
+      "order": 1,
+      "title": "AI Finance Agent",
+      "subTitle": "Agente con Gemini",
+      "label": "Agente financiero con IA",
+      "start": "2026",
+      "summary": "Un agente serverless que vigila Gmail en busca de transacciones financieras, extrae los datos clave con Gemini y alimenta un dashboard en React.",
+      "stages": [
+        {
+          "name": "Push de Gmail",
+          "detail": "Notificación de correo nuevo, polling de respaldo"
+        },
+        {
+          "name": "Ingestor",
+          "detail": "Servicio en Cloud Run que lee el mensaje"
+        },
+        {
+          "name": "Extracción con Gemini",
+          "detail": "Monto, comercio, fecha, cuenta"
+        },
+        {
+          "name": "Monitoreo y renovación",
+          "detail": "Chequeos de salud, renovación automática del token"
+        },
+        {
+          "name": "Dashboard",
+          "detail": "Vista en React de cada transacción"
+        }
+      ],
+      "tags": [
+        "Google Cloud Run",
+        "Gemini",
+        "Gmail API",
+        "React",
+        "TypeScript"
+      ],
+      "links": [
+        {
+          "label": "Ver código en GitHub",
+          "url": "https://github.com/ThonyFD/personal-dashboard"
+        }
+      ],
+      "slots": []
+    },
+    {
+      "order": 2,
+      "title": "AI Job Scraper",
+      "subTitle": "MCP y agentes de código",
+      "label": "Buscador de empleo con IA",
+      "start": "2026",
+      "summary": "Un Actor de Apify que abre un sandbox con Claude Code, Codex CLI y OpenCode listos para ejecutar una búsqueda de empleo a partir de un perfil de candidato.",
+      "stages": [
+        {
+          "name": "Perfil del candidato",
+          "detail": "Perfil en Markdown elegido al ejecutar"
+        },
+        {
+          "name": "Armado del prompt",
+          "detail": "Prompt de búsqueda más reglas de persistencia"
+        },
+        {
+          "name": "Sandbox de agentes",
+          "detail": "Claude Code, Codex CLI, OpenCode"
+        },
+        {
+          "name": "Superficie de control",
+          "detail": "MCP, API REST o shell en el navegador"
+        },
+        {
+          "name": "Resultados",
+          "detail": "Vacantes guardadas en Notion"
+        }
+      ],
+      "tags": [
+        "Apify",
+        "Model Context Protocol",
+        "Claude Code",
+        "Codex",
+        "TypeScript"
+      ],
+      "slots": []
+    },
+    {
+      "order": 3,
+      "title": "AI Multi Agent Harness",
+      "subTitle": "SDLC con agentes",
+      "label": "Ingeniería guiada por agentes",
+      "start": "2026",
+      "summary": "Un harness de seis agentes coordinados que lleva cada cambio de la especificación a la entrega, basado en el modelo Swarm Forge de Robert C. Martin (Uncle Bob). Así entregué un widget de Android, y el mismo método guía mis otros proyectos.",
+      "stages": [
+        {
+          "name": "Specifier",
+          "detail": "Escenarios BDD confirmados por una persona"
+        },
+        {
+          "name": "Coder",
+          "detail": "TDD estricto: rojo, verde, refactor"
+        },
+        {
+          "name": "Cleaner",
+          "detail": "Elimina duplicación, revisa la métrica CRAP"
+        },
+        {
+          "name": "Architect",
+          "detail": "Límites de módulos, Clean Architecture"
+        },
+        {
+          "name": "Reviewer",
+          "detail": "Mutation testing con Pitest"
+        },
+        {
+          "name": "QA",
+          "detail": "Pruebas de aceptación contra la especificación"
+        }
+      ],
+      "tags": [
+        "Agentes de Claude Code",
+        "Git worktrees",
+        "TDD",
+        "Kotlin",
+        "Quality gates",
+        "Basado en Swarm Forge de Robert C. Martin"
+      ],
+      "slots": []
+    },
+    {
+      "order": 4,
+      "title": "Agent Mesh Lab",
+      "subTitle": "Taller comunitario",
+      "label": "Simulación multiagente",
+      "start": "2026",
+      "summary": "Agentes de Google ADK que comparten herramientas por MCP remoto y se delegan trabajo por A2A. Un taller comunitario adaptado de Cloud Runner 2049 de aaronthewarrior.",
+      "stages": [
+        {
+          "name": "Agentes de Google ADK",
+          "detail": "Modelos Gemini en Python"
+        },
+        {
+          "name": "MCP remoto",
+          "detail": "Herramientas compartidas por red"
+        },
+        {
+          "name": "A2A",
+          "detail": "Agentes que delegan en agentes"
+        }
+      ],
+      "tags": [
+        "Google ADK",
+        "MCP",
+        "A2A",
+        "Gemini",
+        "Python",
+        "Repositorio base de aaronthewarrior"
+      ],
+      "slots": []
+    }
+  ]
+}
