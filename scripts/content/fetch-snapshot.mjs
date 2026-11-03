@@ -12,9 +12,8 @@ async function firebaseConfig() {
   if (process.env.FIREBASE_API_KEY && process.env.FIREBASE_PROJECT_ID) {
     return { apiKey: process.env.FIREBASE_API_KEY, projectId: process.env.FIREBASE_PROJECT_ID };
   }
-  const env = await readFile(path.join(root, 'src/environments/environment.prod.ts'), 'utf8');
-  const pick = (key) => env.match(new RegExp(`${key}:\\s*["']([^"']+)["']`))?.[1];
-  const config = { apiKey: pick('apiKey'), projectId: pick('projectId') };
+  // Public web config (the same values every browser received from the old site).
+  const config = JSON.parse(await readFile(path.join(root, 'content/firebase-config.json'), 'utf8'));
   if (!config.apiKey || !config.projectId) throw new Error('Firebase apiKey/projectId not found');
   return config;
 }

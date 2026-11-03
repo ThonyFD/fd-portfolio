@@ -1,7 +1,0 @@
-{
-  "name": "FD Portfolio",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}

@@ -1,0 +1,23 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "roboto",
+        "createdAt": "2026-11-03T20:08:13.682Z",
+        "reason": "user requested Roboto variants in chat on 2026-11-03"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "docs/design/mockup/index.html"
+        ],
+        "createdAt": "2026-11-03T20:08:19.847Z",
+        "reason": "false positive: section.ai has padding-inline var(--margin)=clamp(16px,2vw,32px); taste inspect renders it with 16-32px inset at 390-1440"
+      }
+    ]
+  }
+}
