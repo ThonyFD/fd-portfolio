@@ -1,4 +1,5 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, computed, effect, inject, input } from '@angular/core';
 import { ContentService } from '../../content/content.service';
 import { Locale } from '../../content/content.types';
 import { STRINGS } from '../../i18n/strings';
@@ -30,4 +31,9 @@ export class HomePage {
     ...this.content.byKind(this.locale(), 'schooling'),
     ...this.content.byKind(this.locale(), 'courses'),
   ]);
+
+  constructor() {
+    const document = inject(DOCUMENT);
+    effect(() => document.documentElement.setAttribute('lang', this.locale()));
+  }
 }

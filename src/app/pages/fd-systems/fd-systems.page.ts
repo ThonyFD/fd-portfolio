@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 interface Service {
@@ -23,6 +24,10 @@ interface Differentiator {
 export class FdSystemsPage {
 
   currentYear = new Date().getFullYear();
+
+  constructor() {
+    inject(DOCUMENT).documentElement.setAttribute('lang', 'es');
+  }
 
   services: Service[] = [
     {
