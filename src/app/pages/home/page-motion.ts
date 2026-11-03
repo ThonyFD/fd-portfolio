@@ -19,8 +19,14 @@ export function startPageMotion(root: HTMLElement): () => void {
     },
     { threshold: 0, rootMargin: '0px 0px 15% 0px' },
   );
-  root.querySelectorAll('.rise').forEach((el) => io.observe(el));
+  root.querySelectorAll('.rise').forEach((el) => {
+    // Already on screen: keep it visible instead of hiding and re-revealing it.
+    if (el.getBoundingClientRect().top < innerHeight) el.classList.add('in');
+    else io.observe(el);
+  });
+  document.documentElement.classList.add('app-ready');
   cleanups.push(() => io.disconnect());
+  cleanups.push(() => document.documentElement.classList.remove('app-ready'));
 
   const fit = () =>
     root.querySelectorAll<HTMLElement>('.hero__name, .contact__name').forEach((el) => {

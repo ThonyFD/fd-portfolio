@@ -80,3 +80,12 @@ test('a patch entry matching no slot fails naming it, and writes nothing', async
   await assert.rejects(run(db, 'cutover', { patch: bad }), /Nope/);
   assert.equal(db.writes, before);
 });
+
+test('cutover publishes the repo staged file, not an older staged copy in Firestore', async () => {
+  const db = fakeDb(initial);
+  await run(db, 'stage');
+  const edited = [{ id: 'ai-experience-en', data: { visible: false, staged: true, locale: 'en', slots: [{ title: 'Datacentria v2' }] } }];
+  await run(db, 'cutover', { stagedDocs: edited });
+  assert.equal(db.docs.get('ai-experience-en').slots[0].title, 'Datacentria v2');
+  assert.equal(db.docs.get('ai-experience-en').visible, true);
+});

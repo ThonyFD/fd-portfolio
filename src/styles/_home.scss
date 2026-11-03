@@ -227,21 +227,25 @@
 
 .panel {
   grid-column: 2;
-  grid-row: 1 / span var(--n, 5);
   align-self: start;
-  position: sticky;
-  top: 12vh;
+  margin-bottom: 16px;
   background: var(--navy-surface);
   padding: 24px;
-  opacity: 0;
-  visibility: hidden;
   transition:
     opacity 0.2s var(--ease),
     visibility 0.2s;
 
-  &.is-active {
-    opacity: 1;
-    visibility: visible;
+  .app-ready & {
+    grid-row: 1 / span var(--n, 5);
+    position: sticky;
+    top: 12vh;
+    margin-bottom: 0;
+  }
+
+  // Without the app every panel shows, stacked in the right column.
+  .app-ready &:not(.is-active) {
+    opacity: 0;
+    visibility: hidden;
   }
 
   h3 {
@@ -759,11 +763,10 @@
 
   .panel {
     position: static;
-    display: none;
+  }
 
-    &.is-active {
-      display: block;
-    }
+  .app-ready .panel:not(.is-active) {
+    display: none;
   }
 
   .experience {

@@ -31,8 +31,8 @@ export async function applyContent({ db, phase, dryRun, backupDir, stagedDocs, p
     if (phase === 'stage') {
       if (!existing) target.push({ id: staged.id, data: { ...structuredClone(staged.data), visible: false, staged: true } });
     } else {
-      const base = existing ? existing.data : structuredClone(staged.data);
-      const { staged: _flag, ...published } = { ...base, visible: true };
+      // The repo file is the source of truth: a copy staged earlier may predate edits to it.
+      const { staged: _flag, ...published } = { ...structuredClone(staged.data), visible: true };
       if (existing) existing.data = published;
       else target.push({ id: staged.id, data: published });
     }

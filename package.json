@@ -10,7 +10,7 @@
     "start": "ng serve",
     "watch": "ng build --watch --configuration development",
     "build": "npm run content:fetch && npm run build:site",
-    "test": "ng test --watch=false",
+    "test": "node scripts/content/ensure-snapshot.mjs && ng test --watch=false",
     "content:fetch": "node scripts/content/fetch-snapshot.mjs --out src/content/snapshot.json",
     "test:scripts": "node --test \"scripts/**/*.test.mjs\"",
     "build:site": "ng build && node scripts/seo/write-discovery.mjs dist/portfolio/browser && node scripts/verify-build.mjs dist/portfolio/browser",

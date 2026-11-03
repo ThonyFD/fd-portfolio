@@ -51,8 +51,8 @@ img {
   top: var(--margin);
 }
 
-// Entrances only when script runs; without it every element stays visible.
-.js .rise {
+// Entrances only once the app runs (page-motion.ts adds .app-ready); otherwise everything stays visible.
+.app-ready .rise {
   opacity: 0;
   transform: translateY(24px);
   transition:
@@ -60,13 +60,13 @@ img {
     transform 0.45s var(--ease);
 }
 
-.js .rise.in {
+.app-ready .rise.in {
   opacity: 1;
   transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .js .rise {
+  .app-ready .rise {
     opacity: 1;
     transform: none;
     transition: none;
