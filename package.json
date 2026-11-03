@@ -11,7 +11,9 @@
     "build-dev": "ionic build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "content:fetch": "node scripts/content/fetch-snapshot.mjs --out src/content/snapshot.json",
+    "test:scripts": "node --test \"scripts/**/*.test.mjs\""
   },
   "private": true,
   "dependencies": {
