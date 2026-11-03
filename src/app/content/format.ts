@@ -49,3 +49,16 @@ export function stripHtml(html: string | undefined): string {
     .replace(/ ([,.;:!?])/g, '$1')
     .trim();
 }
+
+/** Sort key for a start date: ISO string, or '' when the value does not parse. */
+function startKey(start: string | undefined): string {
+  return (start && toIso(start)) || '';
+}
+
+/** Newest start first; undated slots keep their relative order at the end. */
+export function byStartDesc<T extends { start?: string }>(slots: T[]): T[] {
+  return slots
+    .map((slot, i) => ({ slot, i, key: startKey(slot.start) }))
+    .sort((a, b) => (a.key === b.key ? a.i - b.i : !a.key ? 1 : !b.key ? -1 : a.key < b.key ? 1 : -1))
+    .map((x) => x.slot);
+}

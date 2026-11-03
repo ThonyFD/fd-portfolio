@@ -32,8 +32,7 @@ describe('HomePage', () => {
   it('lists experience most recent first, with Present for Now', async () => {
     const el = await render('en');
     const titles = [...el.querySelectorAll('#experience article h3')].map((h) => h.textContent?.trim());
-    expect(titles[0]).toBe('Bare slot');
-    expect(titles[1]).toBe('Solutions Architect');
+    expect(titles).toEqual(['Solutions Architect', 'Junior Developer', 'Bare slot']);
     expect(el.querySelector('#experience')?.textContent).toContain('06/2026 – Present');
     expect(el.querySelector('#experience time[datetime="2009-08"]')).not.toBeNull();
   });

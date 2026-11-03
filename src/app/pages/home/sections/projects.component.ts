@@ -1,6 +1,7 @@
 import { Component, computed, input } from '@angular/core';
 import { Locale, Section } from '../../../content/content.types';
 import { STRINGS } from '../../../i18n/strings';
+import { byStartDesc } from '../../../content/format';
 import { PeriodComponent, TagsComponent, text } from './shared';
 
 @Component({
@@ -41,7 +42,7 @@ export class ProjectsComponent {
   readonly section = input.required<Section>();
   readonly locale = input.required<Locale>();
   protected readonly s = computed(() => STRINGS[this.locale()]);
-  protected readonly featured = computed(() => this.section().slots.filter((p) => !p.compact).reverse());
+  protected readonly featured = computed(() => byStartDesc(this.section().slots.filter((p) => !p.compact)));
   protected readonly earlier = computed(() => this.section().slots.filter((p) => p.compact));
 
   protected sub(p: Section): string {

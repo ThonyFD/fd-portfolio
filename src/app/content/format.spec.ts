@@ -1,4 +1,4 @@
-import { formatPeriod, stripHtml } from './format';
+import { byStartDesc, formatPeriod, stripHtml } from './format';
 
 describe('formatPeriod', () => {
   it('formats month/year ranges with ISO values', () => {
@@ -42,5 +42,19 @@ describe('stripHtml', () => {
 
   it('handles undefined', () => {
     expect(stripHtml(undefined)).toBe('');
+  });
+});
+
+describe('byStartDesc', () => {
+  it('orders by start date newest first, undated last, stable for ties', () => {
+    const slots = [
+      { title: 'Tigo', start: '11/2021', order: 4, slots: [] },
+      { title: 'Banca', start: '08/2018', order: 4, slots: [] },
+      { title: 'Undated', order: 9, slots: [] },
+      { title: 'Wicon', start: '01/2020', order: 5, slots: [] },
+      { title: 'ASSA', start: '06/2026', order: 8, slots: [] },
+      { title: 'Yappy', start: '2018-09', order: 3, slots: [] },
+    ];
+    expect(byStartDesc(slots).map((s) => s.title)).toEqual(['ASSA', 'Tigo', 'Wicon', 'Yappy', 'Banca', 'Undated']);
   });
 });

@@ -2,6 +2,7 @@ import { Component, computed, input } from '@angular/core';
 import { Locale, Section } from '../../../content/content.types';
 import { STRINGS } from '../../../i18n/strings';
 import { CONTACT_EMAIL } from '../../../seo/site';
+import { byStartDesc } from '../../../content/format';
 import { PeriodComponent, TagsComponent, text } from './shared';
 
 @Component({
@@ -51,8 +52,8 @@ export class ExperienceComponent {
   readonly locale = input.required<Locale>();
   protected readonly email = CONTACT_EMAIL;
   protected readonly s = computed(() => STRINGS[this.locale()]);
-  /** Firestore orders experience oldest first; recruiters read newest first. */
-  protected readonly roles = computed(() => [...this.section().slots].reverse());
+  /** Recruiters read newest first; Firestore `order` has ties, so sort by start date. */
+  protected readonly roles = computed(() => byStartDesc(this.section().slots));
   protected readonly archiveAlt = computed(() =>
     this.locale() === 'es'
       ? 'Remolcadores, dragas y barcazas esperando en las esclusas de Gatún, hacia el Atlántico, hacia 1913'

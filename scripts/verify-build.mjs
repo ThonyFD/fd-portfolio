@@ -25,11 +25,14 @@ if (!/rel="canonical" href="https:\/\/thonyfd\.com\/"/.test(en)) failures.push('
 const articles = (en.match(/<article/g) ?? []).length;
 if (articles <= 10) failures.push(`index.html: expected more than 10 <article>, found ${articles}`);
 
-const es = read('es/index.html');
-expectIn('es/index.html', es, '<html lang="es"');
-if (!/rel="canonical" href="https:\/\/thonyfd\.com\/es"/.test(es)) failures.push('es/index.html: expected canonical https://thonyfd.com/es');
+const es = read('es.html');
+expectIn('es.html', es, '<html lang="es"');
+if (!/rel="canonical" href="https:\/\/thonyfd\.com\/es"/.test(es)) failures.push('es.html: expected canonical https://thonyfd.com/es');
 
-read('fd-systems/index.html');
+read('fd-systems.html');
+for (const nested of ['es/index.html', 'fd-systems/index.html']) {
+  if (existsSync(path.join(dir, nested))) failures.push(`${nested}: should be flattened (Pages would redirect to a trailing slash)`);
+}
 
 for (const file of ['robots.txt', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'resume.md', '_redirects', '_headers']) read(file);
 
