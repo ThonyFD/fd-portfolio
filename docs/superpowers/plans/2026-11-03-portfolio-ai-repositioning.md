@@ -126,7 +126,7 @@ interface Snapshot { generatedAt: string; preview: boolean;
 - Consumes: `src/content/snapshot.json` (Task 1, `--preview`) for real copy.
 - Produces: an approved direction recorded in `docs/design/DIRECTION.md` (palette tokens, type pair, spacing scale, motion rules) that Task 9 implements.
 
-- [ ] **Step 1:** Invoke the `impeccable` skill (or `design-taste-frontend`) for a senior "solutions architect / AI systems" portfolio. Constraints come from the spec's anti-goals: no purple gradients, no glassmorphism, no emoji bullets, light and dark modes, works at 360px width.
+- [ ] **Step 1:** Invoke the `design-taste-frontend` skill for a senior "solutions architect / AI systems" portfolio. Constraints come from the spec's anti-goals: no purple gradients, no glassmorphism, no emoji bullets, light and dark modes, works at 360px width.
 - [ ] **Step 2:** Build the comp for the hero plus the AI Experience section (desktop 1440 and mobile 390) with real EN copy: headline, one-sentence summary, remote/GMT-5/EN+ES signals, CTAs (email, LinkedIn, GitHub, Resume) and the 5 AI projects in the spec's order.
 - [ ] **Step 3:** Capture screenshots of both widths in both themes.
 - [ ] **Step 4: Stop and present the comp to the user.** Iterate until they approve. Write `docs/design/DIRECTION.md` from the approved comp.
@@ -264,7 +264,7 @@ interface Snapshot { generatedAt: string; preview: boolean;
 - [ ] **Step 2:** Style each section to the comp; sections not in the comp (Experience, Projects, Skills, Education, Contact) extend its system. Respect `prefers-reduced-motion`.
 - [ ] **Step 3:** Accessibility pass: AA contrast in both themes, visible `:focus-visible`, a skip link to `<main>`, every interactive element reachable by keyboard.
 - [ ] **Step 4:** Serve the prerendered build. Screenshot 1440/390 in both themes, compare with the comp, and fix differences. Run Lighthouse (or the `web-perf` skill) on `/` and `/es`: SEO, Accessibility and Best Practices must each be 95 or higher, with no horizontal scroll at 360px.
-- [ ] **Step 5:** Run the `impeccable-finish-reviewer` agent (or `design:design-critique`) against the comp and apply the material fixes.
+- [ ] **Step 5:** Run the `design-taste-frontend` look-and-fix review loop against the comp and apply the material fixes.
 - [ ] **Step 6: Commit** `feat(home): apply approved visual design`.
 
 ### Task 10: Content edits (staged docs, cutover patch, apply script)
