@@ -21,10 +21,10 @@ Secondary: Firebase Hosting `thony-test.web.app` (GitHub Actions in `.github/wor
 | --- | --- |
 | Build command | `npm ci && npm run build` |
 | Build output directory | `dist/portfolio/browser` |
-| Environment variable | `NODE_VERSION=24` |
+| Environment variables (production) | `NODE_VERSION=24` |
+| Environment variables (preview) | `NODE_VERSION=24`, `CONTENT_PREVIEW=1` (builds with staged content) |
 
-Status (2026-11-03): current Pages settings not yet verified (wrangler session expired). Confirm in the dashboard
-(Workers & Pages > fd-portfolio > Settings > Build) before the cutover.
+Before 2026-11-03 the project used `npm run build` with output `www` (the Ionic build) and no Node version.
 
 ## Content changes
 

@@ -43,7 +43,8 @@ async function main() {
   const args = process.argv.slice(2);
   const outIdx = args.indexOf('--out');
   const out = path.resolve(outIdx >= 0 ? args[outIdx + 1] : 'src/content/snapshot.json');
-  const preview = args.includes('--preview');
+  // CONTENT_PREVIEW=1 is set only on the Cloudflare Pages preview environment (see docs/deploy.md).
+  const preview = args.includes('--preview') || process.env.CONTENT_PREVIEW === '1';
 
   const { apiKey, projectId } = await firebaseConfig();
   const docs = await fetchCollection({ projectId, collection: 'portfolio', apiKey });
