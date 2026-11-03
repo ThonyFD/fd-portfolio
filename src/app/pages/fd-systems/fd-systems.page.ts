@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { SeoService } from '../../seo/seo.service';
 
 interface Service {
   icon: string;
@@ -27,6 +28,14 @@ export class FdSystemsPage {
 
   constructor() {
     inject(DOCUMENT).documentElement.setAttribute('lang', 'es');
+    inject(SeoService).apply({
+      title: 'FD Systems | Software a medida e integración de IA',
+      description: 'Desarrollamos software a medida e integramos inteligencia artificial para automatizar procesos y acelerar el crecimiento de tu empresa.',
+      path: '/fd-systems',
+      locale: 'es',
+      ogImage: '/assets/fds-logo.png',
+      alternates: false,
+    });
   }
 
   services: Service[] = [

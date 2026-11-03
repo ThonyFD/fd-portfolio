@@ -1,6 +1,8 @@
 import { Locale } from '../content/content.types';
 
 export interface UiStrings {
+  metaTitle: string;
+  metaDescription: string;
   skip: string;
   role: string;
   sentence: string;
@@ -34,6 +36,9 @@ const CREDITS =
 
 export const STRINGS: Record<Locale, UiStrings> = {
   en: {
+    metaTitle: 'Anthony Mosquera | Solutions Architect · AI Systems Engineer',
+    metaDescription:
+      'Solutions Architect and AI Systems Engineer in Panama City. I design AI agent systems and run them in production. Open to remote roles.',
     skip: 'Skip to content',
     role: 'Solutions Architect and AI Systems Engineer',
     sentence: 'I design AI agent systems and run them in production. Open to remote roles.',
@@ -62,6 +67,9 @@ export const STRINGS: Record<Locale, UiStrings> = {
     credits: CREDITS,
   },
   es: {
+    metaTitle: 'Anthony Mosquera | Arquitecto de Soluciones · Ingeniero de Sistemas con IA',
+    metaDescription:
+      'Arquitecto de Soluciones e Ingeniero de Sistemas con IA en Ciudad de Panamá. Diseño sistemas de agentes de IA en producción. Disponible en remoto.',
     skip: 'Ir al contenido',
     role: 'Arquitecto de Soluciones e Ingeniero de Sistemas con IA',
     sentence: 'Diseño sistemas de agentes de IA y los opero en producción. Disponible para trabajo remoto.',

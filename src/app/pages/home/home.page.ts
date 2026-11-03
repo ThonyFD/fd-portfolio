@@ -3,6 +3,8 @@ import { Component, computed, effect, inject, input } from '@angular/core';
 import { ContentService } from '../../content/content.service';
 import { Locale } from '../../content/content.types';
 import { STRINGS } from '../../i18n/strings';
+import { buildProfileJsonLd } from '../../seo/json-ld';
+import { SeoService } from '../../seo/seo.service';
 import { AiExperienceComponent } from './sections/ai-experience.component';
 import { ContactComponent } from './sections/contact.component';
 import { EducationComponent } from './sections/education.component';
@@ -34,6 +36,18 @@ export class HomePage {
 
   constructor() {
     const document = inject(DOCUMENT);
-    effect(() => document.documentElement.setAttribute('lang', this.locale()));
+    const seo = inject(SeoService);
+    effect(() => {
+      const locale = this.locale();
+      document.documentElement.setAttribute('lang', locale);
+      seo.apply({
+        title: this.s().metaTitle,
+        description: this.s().metaDescription,
+        path: locale === 'es' ? '/es' : '/',
+        locale,
+        ogImage: `/og/og-${locale}.png`,
+        jsonLd: buildProfileJsonLd(this.content.get(locale), locale),
+      });
+    });
   }
 }
