@@ -22,6 +22,7 @@ export interface UiStrings {
   facts: { basedIn: string; basedInValue: string; works: string; worksValue: string; reach: string };
   projectsHeading: string;
   earlierWork: string;
+  details: string;
   skillsHeading: string;
   educationHeading: string;
   coursesHeading: string;
@@ -59,6 +60,7 @@ export const STRINGS: Record<Locale, UiStrings> = {
     facts: { basedIn: 'Based in', basedInValue: 'Panama City, GMT-5', works: 'Works', worksValue: 'Remote, English and Spanish', reach: 'Reach me' },
     projectsHeading: 'Selected projects',
     earlierWork: 'Earlier work',
+    details: 'Details',
     skillsHeading: 'Skills',
     educationHeading: 'Education',
     coursesHeading: 'Courses',
@@ -90,6 +92,7 @@ export const STRINGS: Record<Locale, UiStrings> = {
     facts: { basedIn: 'Ubicación', basedInValue: 'Ciudad de Panamá, GMT-5', works: 'Modalidad', worksValue: 'Remoto, inglés y español', reach: 'Contacto' },
     projectsHeading: 'Proyectos destacados',
     earlierWork: 'Trabajo anterior',
+    details: 'Detalles',
     skillsHeading: 'Habilidades',
     educationHeading: 'Educación',
     coursesHeading: 'Cursos',

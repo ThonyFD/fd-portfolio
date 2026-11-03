@@ -47,8 +47,8 @@ export function stripHtml(html) {
 }
 
 function period(start, end, locale) {
-  const endText = end && String(end).trim().toLowerCase() === 'now' ? L10N[locale].present : end;
-  return [start, endText].filter(Boolean).join(' – ');
+  const word = (v) => (v && String(v).trim().toLowerCase() === 'now' ? L10N[locale].present : v);
+  return [word(start), word(end)].filter(Boolean).join(' – ');
 }
 
 function toIso(value) {

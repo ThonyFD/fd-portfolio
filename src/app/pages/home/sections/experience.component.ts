@@ -24,7 +24,7 @@ import { PeriodComponent, TagsComponent, text } from './shared';
         <figcaption>{{ archiveCaption() }}</figcaption>
       </figure>
       <figure class="experience__portrait rise">
-        <img src="assets/archive/profile.jpg" alt="Anthony Mosquera" width="704" height="1472" loading="lazy">
+        <img src="assets/archive/profile.jpg" alt="Anthony Mosquera" width="478" height="1000" loading="lazy">
         <figcaption>Anthony Mosquera.</figcaption>
       </figure>
       <ol class="roles">
@@ -37,7 +37,10 @@ import { PeriodComponent, TagsComponent, text } from './shared';
               }
               <app-period [start]="role.start" [end]="role.end" [locale]="locale()" />
               @if (role.description) {
+                <details class="role__more">
+                <summary>{{ s().details }}</summary>
                 <div class="role__body" [innerHTML]="role.description"></div>
+              </details>
               }
               <app-tags [tags]="role.tags" />
             </article>

@@ -19,6 +19,11 @@ describe('formatPeriod', () => {
     expect(formatPeriod('06/2026', 'now', 'en').text).toBe('06/2026 – Present');
   });
 
+  it('renders a Now start as Present', () => {
+    expect(formatPeriod('Now', undefined, 'en')).toEqual({ text: 'Present' });
+    expect(formatPeriod('now', undefined, 'es').text).toBe('Actualidad');
+  });
+
   it('keeps free text ends as written', () => {
     expect(formatPeriod('01/2020', 'Freelance', 'en')).toEqual({ text: '01/2020 – Freelance', startIso: '2020-01' });
   });

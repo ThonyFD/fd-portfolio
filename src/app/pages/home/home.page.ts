@@ -1,8 +1,9 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, computed, effect, inject, input } from '@angular/core';
+import { Component, DestroyRef, ElementRef, afterNextRender, computed, effect, inject, input } from '@angular/core';
 import { ContentService } from '../../content/content.service';
 import { Locale } from '../../content/content.types';
 import { STRINGS } from '../../i18n/strings';
+import { startPageMotion } from './page-motion';
 import { buildProfileJsonLd } from '../../seo/json-ld';
 import { SeoService } from '../../seo/seo.service';
 import { AiExperienceComponent } from './sections/ai-experience.component';
@@ -36,6 +37,9 @@ export class HomePage {
 
   constructor() {
     const document = inject(DOCUMENT);
+    const host = inject(ElementRef<HTMLElement>).nativeElement;
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => destroyRef.onDestroy(startPageMotion(host)));
     const seo = inject(SeoService);
     effect(() => {
       const locale = this.locale();

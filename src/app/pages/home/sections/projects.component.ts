@@ -19,7 +19,10 @@ import { PeriodComponent, TagsComponent, text } from './shared';
             }
             <app-period [start]="p.start" [end]="p.end" [locale]="locale()" />
             @if (p.description) {
-              <div class="project__body" [innerHTML]="p.description"></div>
+              <details class="project__more">
+                <summary>{{ s().details }}</summary>
+                <div class="project__body" [innerHTML]="p.description"></div>
+              </details>
             }
             <app-tags [tags]="p.tags" />
           </article>

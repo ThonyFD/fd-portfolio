@@ -81,3 +81,11 @@ test('buildSnapshot throws empty content when a locale lacks intro or experience
   const docs = base().filter((d) => d.id !== 'experience-es');
   assert.throws(() => buildSnapshot(docs, { preview: false, stagedDocs: [], patch: { docs: [] } }), /empty content/);
 });
+
+test('buildSnapshot demotes headings inside slot descriptions', () => {
+  const docs = base();
+  docs.find((d) => d.id === 'experience-en').data.slots[0].description = '<p>x</p><h2 class="a">Responsibilities:</h2><H3>Notable</H3>';
+  const s = buildSnapshot(docs, { preview: false, stagedDocs: [], patch: { docs: [] } });
+  const slot = s.locales.en.sections[0].slots.find((x) => x.title === 'B');
+  assert.equal(slot.description, '<p>x</p><p><strong>Responsibilities:</strong></p><p><strong>Notable</strong></p>');
+});

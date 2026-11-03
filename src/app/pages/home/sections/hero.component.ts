@@ -21,7 +21,7 @@ import { text } from './shared';
       </nav>
       <h1 class="hero__name" id="wordmark">{{ name }}</h1>
       <figure class="hero__shot" aria-hidden="true">
-        <img src="assets/archive/gatun-emergency-dam-1913.jpg" alt="" width="1289" height="830">
+        <img src="assets/archive/gatun-emergency-dam-1913.jpg" alt="" width="900" height="579" fetchpriority="high">
       </figure>
       <div class="hero__corner"><p>{{ s().place }}</p></div>
       <div class="hero__corner hero__corner--right">

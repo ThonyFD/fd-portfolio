@@ -20,8 +20,8 @@ function toIso(value: string): string | undefined {
 }
 
 export function formatPeriod(start: string | undefined, end: string | undefined, locale: Locale): Period {
-  const endText = end && end.trim().toLowerCase() === 'now' ? PRESENT[locale] : end?.trim();
-  const text = [start?.trim(), endText].filter(Boolean).join(' – ');
+  const word = (v: string | undefined) => (v && v.trim().toLowerCase() === 'now' ? PRESENT[locale] : v?.trim());
+  const text = [word(start), word(end)].filter(Boolean).join(' – ');
   const period: Period = { text };
   const startIso = start ? toIso(start) : undefined;
   const endIso = end ? toIso(end) : undefined;

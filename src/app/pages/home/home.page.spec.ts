@@ -55,9 +55,12 @@ describe('HomePage', () => {
     expect(el.querySelector('#skills h3')?.textContent?.trim()).toBe('AI');
   });
 
-  it('renders AI projects as tabs with stages and only real links', async () => {
+  it('renders AI projects as disclosure buttons with stages and only real links', async () => {
     const el = await render('en');
-    expect(el.querySelectorAll('#ai-experience [role="tab"]').length).toBe(2);
+    const buttons = [...el.querySelectorAll('#ai-experience button.ai__name')];
+    expect(buttons.map((b) => b.getAttribute('aria-expanded'))).toEqual(['true', 'false']);
+    expect(el.querySelector('#ai-experience [role="tab"], #ai-experience [role="tablist"]')).toBeNull();
+    expect(el.querySelector('#' + buttons[0].getAttribute('aria-controls'))?.getAttribute('role')).toBe('region');
     expect(el.querySelector('#ai-experience ol.stages li')?.textContent).toContain('Agent message');
     const links = [...el.querySelectorAll('#ai-experience a')].map((a) => a.getAttribute('href'));
     expect(links).toEqual(['https://github.com/ThonyFD/personal-dashboard']);

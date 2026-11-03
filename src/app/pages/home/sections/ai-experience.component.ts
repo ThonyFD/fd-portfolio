@@ -14,17 +14,15 @@ const STAGE_MS = 450;
         <h2 id="ai-h" class="rise">{{ s().aiHeading }}</h2>
         <p class="ai__note rise">{{ s().aiNote }}</p>
       </div>
-      <ul class="ai__list" role="tablist" [attr.aria-label]="s().aiHeading">
+      <ul class="ai__list" [attr.aria-label]="s().aiHeading" [style.--n]="projects().length">
         @for (p of projects(); track p.title; let i = $index) {
-          <li class="ai__item rise" role="presentation">
+          <li class="ai__item">
             <button
-              class="ai__name"
+              class="ai__name rise"
               type="button"
-              role="tab"
               [id]="'t-' + i"
               [attr.aria-controls]="'p-' + i"
-              [attr.aria-selected]="active() === i"
-              [tabIndex]="active() === i ? 0 : -1"
+              [attr.aria-expanded]="active() === i"
               (click)="select(i)"
               (mouseenter)="select(i)"
               (keydown)="onKey($event, i)"
@@ -32,7 +30,7 @@ const STAGE_MS = 450;
               <span class="ai__title">{{ p.title }}</span>
               <span class="ai__meta">{{ meta(p) }}</span>
             </button>
-            <article class="panel" role="tabpanel" [id]="'p-' + i" [attr.aria-labelledby]="'t-' + i" [class.is-active]="active() === i" data-ui>
+            <article class="panel" role="region" [id]="'p-' + i" [attr.aria-labelledby]="'t-' + i" [class.is-active]="active() === i" data-ui>
               @if (p.summary || p.description) {
                 <h3>{{ heading(p) }}</h3>
               }
@@ -89,7 +87,7 @@ export class AiExperienceComponent {
     const n = this.projects().length;
     const next = (i + (event.key === 'ArrowDown' ? 1 : -1) + n) % n;
     this.select(next);
-    (event.currentTarget as HTMLElement).closest('ul')?.querySelectorAll<HTMLElement>('[role="tab"]')[next]?.focus();
+    (event.currentTarget as HTMLElement).closest('ul')?.querySelectorAll<HTMLElement>('.ai__name')[next]?.focus();
   }
 
   protected trace(i: number): void {

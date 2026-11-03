@@ -34,10 +34,15 @@ export function applyPatch(docs, patch) {
   return out;
 }
 
+/** Headings inside Firestore HTML would break the page outline; render them as bold paragraphs. */
+function demoteHeadings(html) {
+  return typeof html === 'string' ? html.replace(/<h[1-6][^>]*>([\s\S]*?)<\/h[1-6]>/gi, '<p><strong>$1</strong></p>') : html;
+}
+
 function toSection({ id, data }) {
   const slots = (data.slots ?? [])
     .filter((s) => !s.hidden)
-    .map((s, i) => ({ ...s, slots: s.slots ?? [], _i: i }))
+    .map((s, i) => ({ ...s, description: demoteHeadings(s.description), slots: s.slots ?? [], _i: i }))
     .sort((a, b) => byOrder(a, b) || a._i - b._i)
     .map(({ _i, ...s }) => s);
   return { ...data, id, kind: sectionKind(id), slots };
