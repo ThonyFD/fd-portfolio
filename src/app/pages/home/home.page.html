@@ -1,0 +1,27 @@
+<a class="skip" href="#main">{{ s().skip }}</a>
+<app-hero [intro]="intro()" [locale]="locale()" />
+<figure class="band rise">
+  <img src="assets/archive/gatun-locks-1913.jpg" [alt]="s().bandAlt" width="1920" height="304">
+  <figcaption>{{ s().bandCaption }}</figcaption>
+</figure>
+<main id="main">
+  @if (ai(); as section) {
+    <app-ai-experience [section]="section" [locale]="locale()" />
+  }
+  @if (experience(); as section) {
+    <app-experience [section]="section" [locale]="locale()" />
+  }
+  @if (projects(); as section) {
+    <app-projects [section]="section" [locale]="locale()" />
+  }
+  @if (skills().length) {
+    <app-skills [sections]="skills()" [locale]="locale()" />
+  }
+  @if (education().length) {
+    <app-education [sections]="education()" [locale]="locale()" />
+  }
+  <app-contact [locale]="locale()" />
+</main>
+<footer class="foot">
+  <p class="foot__credits">{{ s().credits }}</p>
+</footer>

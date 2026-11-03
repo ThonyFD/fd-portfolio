@@ -9,6 +9,11 @@ export type SectionKind =
   | 'courses'
   | 'schooling';
 
+export interface Stage {
+  name: string;
+  detail: string;
+}
+
 export interface Link {
   label: string;
   url: string;
@@ -38,6 +43,7 @@ export interface Section {
   title?: string;
   visible?: boolean;
   links?: Link[];
+  stages?: Stage[];
   highlights?: string[];
   compact?: boolean;
   hidden?: boolean;
