@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true" class="fds-content">
+<main class="fds-content">
 
   <!-- NAV -->
   <nav class="fds-nav">
@@ -6,13 +6,11 @@
       <img src="assets/fds-logo.png" alt="FD Systems" />
     </div>
     <div class="fds-nav__links">
-      <a (click)="scrollTo('services')">Servicios</a>
-      <a (click)="scrollTo('why-us')">Nosotros</a>
-      <a (click)="scrollTo('contact')">Contacto</a>
+      <a href="/fd-systems#services" (click)="scrollTo('services', $event)">Servicios</a>
+      <a href="/fd-systems#why-us" (click)="scrollTo('why-us', $event)">Nosotros</a>
+      <a href="/fd-systems#contact" (click)="scrollTo('contact', $event)">Contacto</a>
     </div>
-    <ion-button class="fds-nav__cta" (click)="scrollTo('contact')" shape="round" size="small">
-      Hablemos
-    </ion-button>
+    <a class="fds-btn fds-nav__cta" href="/fd-systems#contact" (click)="scrollTo('contact', $event)">Hablemos</a>
   </nav>
 
   <!-- HERO -->
@@ -34,17 +32,17 @@
       </p>
 
       <div class="fds-hero__actions">
-        <ion-button (click)="scrollTo('contact')" shape="round" size="large" class="fds-btn-primary">
+        <a class="fds-btn fds-btn--large fds-btn-primary" href="/fd-systems#contact" (click)="scrollTo('contact', $event)">
           Comienza tu proyecto
-          <ion-icon slot="end" name="arrow-forward"></ion-icon>
-        </ion-button>
-        <ion-button (click)="scrollTo('services')" shape="round" size="large" fill="outline" class="fds-btn-outline">
+          <span class="fds-icon" aria-hidden="true" style="--icon: url(assets/icons/arrow-forward.svg)"></span>
+        </a>
+        <a class="fds-btn fds-btn--large fds-btn-outline" href="/fd-systems#services" (click)="scrollTo('services', $event)">
           Ver servicios
-        </ion-button>
+        </a>
       </div>
     </div>
 
-    <div class="fds-hero__scroll-hint" (click)="scrollTo('services')">
+    <div class="fds-hero__scroll-hint" aria-hidden="true" (click)="scrollTo('services')">
       <span></span>
     </div>
   </section>
@@ -58,22 +56,22 @@
         <p>Desde una idea hasta un producto en producción, acompañamos cada etapa.</p>
       </div>
 
-      <ion-grid>
-        <ion-row>
-          <ion-col sizeLg="4" sizeMd="6" sizeXs="12" *ngFor="let svc of services">
-            <div class="fds-card">
-              <div class="fds-card__icon">
-                <ion-icon [name]="svc.icon"></ion-icon>
-              </div>
-              <h3 class="fds-card__title">{{ svc.title }}</h3>
-              <p class="fds-card__desc">{{ svc.description }}</p>
-              <div class="fds-card__tags">
-                <span class="fds-tag" *ngFor="let tag of svc.tags">{{ tag }}</span>
-              </div>
+      <div class="fds-grid">
+        @for (svc of services; track svc.title) {
+          <div class="fds-card">
+            <div class="fds-card__icon">
+              <span class="fds-icon" aria-hidden="true" [style.--icon]="'url(assets/icons/' + svc.icon + '.svg)'"></span>
             </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+            <h3 class="fds-card__title">{{ svc.title }}</h3>
+            <p class="fds-card__desc">{{ svc.description }}</p>
+            <div class="fds-card__tags">
+              @for (tag of svc.tags; track tag) {
+                <span class="fds-tag">{{ tag }}</span>
+              }
+            </div>
+          </div>
+        }
+      </div>
     </div>
   </section>
 
@@ -86,24 +84,24 @@
         <p>Combinamos experiencia técnica con visión de negocio para entregarte soluciones que funcionan.</p>
       </div>
 
-      <ion-grid>
-        <ion-row class="ion-justify-content-center">
-          <ion-col sizeLg="4" sizeMd="6" sizeXs="12" *ngFor="let d of differentiators">
-            <div class="fds-diff-card">
-              <div class="fds-diff-card__icon">
-                <ion-icon [name]="d.icon"></ion-icon>
-              </div>
-              <h3>{{ d.title }}</h3>
-              <p>{{ d.description }}</p>
+      <div class="fds-grid fds-grid--center">
+        @for (d of differentiators; track d.title) {
+          <div class="fds-diff-card">
+            <div class="fds-diff-card__icon">
+              <span class="fds-icon" aria-hidden="true" [style.--icon]="'url(assets/icons/' + d.icon + '.svg)'"></span>
             </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+            <h3>{{ d.title }}</h3>
+            <p>{{ d.description }}</p>
+          </div>
+        }
+      </div>
 
       <div class="fds-tech">
         <p class="fds-tech__label">Tecnologías que dominamos</p>
         <div class="fds-tech__pills">
-          <span class="fds-tech__pill" *ngFor="let t of techStack">{{ t }}</span>
+          @for (t of techStack; track t) {
+            <span class="fds-tech__pill">{{ t }}</span>
+          }
         </div>
       </div>
     </div>
@@ -124,37 +122,25 @@
       </p>
 
       <div class="fds-contact__actions">
-        <ion-button
-          href="https://api.whatsapp.com/send?l=es&phone=50765839292"
-          shape="round"
-          size="large"
-          class="fds-btn-whatsapp"
-          target="_blank"
-        >
-          <ion-icon slot="start" name="logo-whatsapp"></ion-icon>
+        <a class="fds-btn fds-btn--large fds-btn-whatsapp" href="https://api.whatsapp.com/send?l=es&phone=50765839292" target="_blank" rel="noopener">
+          <span class="fds-icon" aria-hidden="true" style="--icon: url(assets/icons/logo-whatsapp.svg)"></span>
           Escríbenos por WhatsApp
-        </ion-button>
-        <ion-button
-          href="mailto:contact@fdsystems.dev"
-          shape="round"
-          size="large"
-          fill="outline"
-          class="fds-btn-outline"
-        >
-          <ion-icon slot="start" name="mail-outline"></ion-icon>
+        </a>
+        <a class="fds-btn fds-btn--large fds-btn-outline" href="mailto:contact@fdsystems.dev">
+          <span class="fds-icon" aria-hidden="true" style="--icon: url(assets/icons/mail-outline.svg)"></span>
           Enviar correo
-        </ion-button>
+        </a>
       </div>
 
       <div class="fds-contact__social">
-        <a href="https://www.linkedin.com/in/thonyfd/" target="_blank" aria-label="LinkedIn">
-          <ion-icon name="logo-linkedin"></ion-icon>
+        <a href="https://www.linkedin.com/in/thonyfd/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <span class="fds-icon" aria-hidden="true" style="--icon: url(assets/icons/logo-linkedin.svg)"></span>
         </a>
-        <a href="https://github.com/ThonyFD" target="_blank" aria-label="GitHub">
-          <ion-icon name="logo-github"></ion-icon>
+        <a href="https://github.com/ThonyFD" target="_blank" rel="noopener" aria-label="GitHub">
+          <span class="fds-icon" aria-hidden="true" style="--icon: url(assets/icons/logo-github.svg)"></span>
         </a>
-        <a href="https://api.whatsapp.com/send?l=es&phone=50765839292" target="_blank" aria-label="WhatsApp">
-          <ion-icon name="logo-whatsapp"></ion-icon>
+        <a href="https://api.whatsapp.com/send?l=es&phone=50765839292" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <span class="fds-icon" aria-hidden="true" style="--icon: url(assets/icons/logo-whatsapp.svg)"></span>
         </a>
       </div>
     </div>
@@ -166,4 +152,4 @@
     <a routerLink="/" class="fds-footer__back">Ver portafolio personal →</a>
   </footer>
 
-</ion-content>
+</main>

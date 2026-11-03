@@ -1,0 +1,16 @@
+# Rebuilds production after Firestore content changes by calling the Cloudflare Pages deploy hook.
+name: Rebuild site from Firestore content
+'on':
+  workflow_dispatch:
+  schedule:
+    - cron: '0 10 * * *'
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Cloudflare Pages deploy hook
+        env:
+          HOOK: ${{ secrets.CF_PAGES_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then echo "CF_PAGES_DEPLOY_HOOK is not set"; exit 1; fi
+          curl -fsS -X POST "$HOOK"

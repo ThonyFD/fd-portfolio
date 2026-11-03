@@ -1,0 +1,250 @@
+{
+  "docs": [
+    {
+      "doc": "introduction-en",
+      "set": {
+        "subTitle": "Solutions Architect · AI Systems Engineer",
+        "summary": "I design AI agent systems and run them in production. Open to remote roles.",
+        "tags": [
+          "AI Agents",
+          "LLM Integration",
+          "MCP",
+          "Serverless",
+          "Solutions Architecture",
+          "AWS",
+          "GCP",
+          "Azure"
+        ]
+      }
+    },
+    {
+      "doc": "introduction-es",
+      "set": {
+        "subTitle": "Arquitecto de Soluciones · Ingeniero de Sistemas con IA",
+        "summary": "Diseño sistemas de agentes de IA y los opero en producción. Disponible para trabajo remoto.",
+        "tags": [
+          "AI Agents",
+          "LLM Integration",
+          "MCP",
+          "Serverless",
+          "Solutions Architecture",
+          "AWS",
+          "GCP",
+          "Azure"
+        ]
+      }
+    },
+    {
+      "doc": "projects-en",
+      "slots": [
+        {
+          "match": {
+            "title": "Generali App"
+          },
+          "set": {
+            "compact": true
+          }
+        },
+        {
+          "match": {
+            "title": "LPF Fantasy"
+          },
+          "set": {
+            "compact": true
+          }
+        },
+        {
+          "match": {
+            "title": "MINSA Inspector"
+          },
+          "set": {
+            "compact": true
+          }
+        },
+        {
+          "match": {
+            "title": "TVN Alertas App"
+          },
+          "set": {
+            "compact": true
+          }
+        },
+        {
+          "match": {
+            "title": "Dektro SAAS"
+          },
+          "set": {
+            "compact": true
+          }
+        },
+        {
+          "match": {
+            "title": "Rentabilidad Sucursales"
+          },
+          "set": {
+            "compact": true
+          }
+        },
+        {
+          "match": {
+            "title": "Canon Web"
+          },
+          "set": {
+            "compact": true
+          }
+        },
+        {
+          "match": {
+            "title": "Bladex SysApp"
+          },
+          "set": {
+            "compact": true
+          }
+        },
+        {
+          "match": {
+            "title": "Datacentria"
+          },
+          "set": {
+            "hidden": true
+          }
+        }
+      ]
+    },
+    {
+      "doc": "projects-es",
+      "slots": [
+        {
+          "match": {
+            "title": "Generali App"
+          },
+          "set": {
+            "compact": true
+          }
+        },
+        {
+          "match": {
+            "title": "LPF Fantasy"
+          },
+          "set": {
+            "compact": true
+          }
+        },
+        {
+          "match": {
+            "title": "MINSA Inspector"
+          },
+          "set": {
+            "compact": true
+          }
+        },
+        {
+          "match": {
+            "title": "TVN Alertas App"
+          },
+          "set": {
+            "compact": true
+          }
+        },
+        {
+          "match": {
+            "title": "Dektro SAAS"
+          },
+          "set": {
+            "compact": true
+          }
+        },
+        {
+          "match": {
+            "title": "Rentabilidad Caja de Ahorros"
+          },
+          "set": {
+            "compact": true
+          }
+        },
+        {
+          "match": {
+            "title": "Canon Web"
+          },
+          "set": {
+            "compact": true
+          }
+        },
+        {
+          "match": {
+            "title": "Bladex SysApp"
+          },
+          "set": {
+            "compact": true
+          }
+        },
+        {
+          "match": {
+            "title": "Datacentria"
+          },
+          "set": {
+            "hidden": true
+          }
+        }
+      ]
+    },
+    {
+      "doc": "courses-en",
+      "slots": [
+        {
+          "match": {
+            "title": "WordPress Plugins Course"
+          },
+          "set": {
+            "hidden": true
+          }
+        },
+        {
+          "match": {
+            "title": "Unique Interface Design Course"
+          },
+          "set": {
+            "hidden": true
+          }
+        },
+        {
+          "match": {
+            "title": "C++"
+          },
+          "set": {
+            "hidden": true
+          }
+        }
+      ]
+    },
+    {
+      "doc": "courses-es",
+      "slots": [
+        {
+          "match": {
+            "title": "Curso de Creación de Plugins para WordPress"
+          },
+          "set": {
+            "hidden": true
+          }
+        },
+        {
+          "match": {
+            "title": "Curso de Diseño de Interfaces Únicas"
+          },
+          "set": {
+            "hidden": true
+          }
+        },
+        {
+          "match": {
+            "title": "Curso Práctico de C++"
+          },
+          "set": {
+            "hidden": true
+          }
+        }
+      ]
+    }
+  ]
+}

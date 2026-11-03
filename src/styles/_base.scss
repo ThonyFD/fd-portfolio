@@ -1,0 +1,74 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  overflow-x: clip;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: var(--step-body);
+  line-height: 1.55;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  z-index: 10;
+  background: var(--pink);
+  color: var(--carmine);
+  padding: 8px 12px;
+}
+
+.skip:focus {
+  left: var(--margin);
+  top: var(--margin);
+}
+
+// Entrances only once the app runs (page-motion.ts adds .app-ready); otherwise everything stays visible.
+.app-ready .rise {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.45s var(--ease),
+    transform 0.45s var(--ease);
+}
+
+.app-ready .rise.in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-ready .rise {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

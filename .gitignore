@@ -67,3 +67,8 @@ testem.log
 .DS_Store
 Thumbs.db
 package-lock.json
+/.superpowers
+
+/src/content/snapshot.json
+/content/backups
+/.taste-skill

@@ -20,10 +20,57 @@ $border:    rgba(255, 255, 255, 0.08);
   background-clip: text;
 }
 
+// ── PORT HELPERS (replace Ionic components) ─────
+.fds-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 18px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 999px;
+  color: $white;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: transform .2s ease, opacity .2s ease;
+
+  &:hover { transform: translateY(-2px); }
+  &:focus-visible { outline: 2px solid $cyan; outline-offset: 3px; }
+}
+
+.fds-btn--large { padding: 14px 28px; font-size: 16px; }
+
+.fds-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-color: currentColor;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+}
+
+.fds-btn .fds-icon { font-size: 18px; }
+
+.fds-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+
+  @media (max-width: 991px) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (max-width: 575px) { grid-template-columns: 1fr; }
+}
+
+.fds-grid > * { margin: 5px; }
+
 // Content background
 .fds-content {
-  --background: #{$navy};
-  --color: #{$white};
+  display: block;
+  min-height: 100vh;
+  background: $navy;
+  color: $white;
   font-family: 'Inter', 'SF Pro Display', system-ui, sans-serif;
 }
 
@@ -62,9 +109,9 @@ $border:    rgba(255, 255, 255, 0.08);
   }
 
   &__cta {
-    --background: linear-gradient(90deg, #{$blue}, #{$cyan});
-    --border-radius: 999px;
-    --color: #{$white};
+    background: linear-gradient(90deg, #{$blue}, #{$cyan});
+    border-radius: 999px;
+    color: #{$white};
     font-weight: 600;
   }
 
@@ -175,24 +222,24 @@ $border:    rgba(255, 255, 255, 0.08);
 
 // ── BUTTONS ────────────────────────────────────
 .fds-btn-primary {
-  --background: linear-gradient(90deg, #{$blue}, #{$cyan});
-  --border-radius: 999px;
-  --color: #{$white};
-  --box-shadow: 0 8px 32px rgba(26, 126, 255, 0.45);
+  background: linear-gradient(90deg, #{$blue}, #{$cyan});
+  border-radius: 999px;
+  color: #{$white};
+  box-shadow: 0 8px 32px rgba(26, 126, 255, 0.45);
   font-weight: 700;
 }
 
 .fds-btn-outline {
-  --border-radius: 999px;
-  --color: #{$white};
-  --border-color: rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  color: #{$white};
+  border: 1px solid rgba(255, 255, 255, 0.35);
   font-weight: 600;
 }
 
 .fds-btn-whatsapp {
-  --background: linear-gradient(90deg, #25d366, #1fba58);
-  --border-radius: 999px;
-  --color: #{$white};
+  background: linear-gradient(90deg, #25d366, #1fba58);
+  border-radius: 999px;
+  color: #{$white};
   font-weight: 700;
 }
 
@@ -277,7 +324,7 @@ $border:    rgba(255, 255, 255, 0.08);
     justify-content: center;
     margin-bottom: 20px;
 
-    ion-icon {
+    .fds-icon {
       font-size: 24px;
       color: $cyan;
     }
@@ -336,7 +383,7 @@ $border:    rgba(255, 255, 255, 0.08);
     justify-content: center;
     margin: 0 auto 20px;
 
-    ion-icon {
+    .fds-icon {
       font-size: 28px;
       color: $gold;
     }
@@ -443,7 +490,7 @@ $border:    rgba(255, 255, 255, 0.08);
 
       &:hover { color: $white; transform: translateY(-2px); }
 
-      ion-icon { font-size: 26px; }
+      .fds-icon { font-size: 26px; }
     }
   }
 }
@@ -492,3 +539,4 @@ $border:    rgba(255, 255, 255, 0.08);
   50%  { opacity: 0.3; transform: rotate(45deg) translate(6px, 6px); }
   100% { opacity: 1;   transform: rotate(45deg) translate(0, 0); }
 }
+

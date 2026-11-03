@@ -1,0 +1,50 @@
+// Tokens from docs/design/DIRECTION.md. Colours from the Panama flag; one radius: square.
+:root {
+  --carmine: #9c1220;
+  --carmine-ink: #ffffff;
+  --carmine-muted: #f6c9cc;
+  --pink: #ffd9dc;
+  --navy: #0b2341;
+  --navy-surface: #12305a;
+  --navy-stage: #0a1d36;
+  --navy-ink: #ffffff;
+  --navy-muted: #a9b9cf;
+  --bg: #f7f7f5;
+  --surface: #ebebe8;
+  --ink: #141414;
+  --muted: #555555;
+  --foot-name: #9c1220;
+  --margin: clamp(16px, 2vw, 32px);
+  --gap-section: clamp(96px, 10vw, 160px);
+  --step-small: 1rem;
+  --step-body: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-section: 1.75rem;
+  --step-head: clamp(2.75rem, 1.6rem + 3.9vw, 5rem);
+  --display: 'Roboto Flex', 'Roboto', system-ui, sans-serif;
+  --text: 'Roboto', system-ui, sans-serif;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  color-scheme: light;
+}
+
+@mixin dark {
+  --carmine: #8a101c;
+  --navy: #081a31;
+  --navy-surface: #0f2849;
+  --bg: #0f0f10;
+  --surface: #1c1c1e;
+  --ink: #f2f2f0;
+  --muted: #b3b3b0;
+  --foot-name: #ff8a94;
+  color-scheme: dark;
+}
+
+:root[data-theme='dark'] {
+  @include dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    @include dark;
+  }
+}

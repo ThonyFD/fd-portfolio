@@ -1,115 +1,57 @@
-import {Component, ViewChild} from '@angular/core';
-import {CommonModule} from "@angular/common";
-import {ActionSheetController, IonicModule, IonModal, LoadingController} from "@ionic/angular";
-import {ProfileCardComponent} from "../../components/profile-card/profile-card.component";
-import {environment} from "../../../environments/environment";
-import {FirebaseService} from "../../services/firebase.service";
-import {Section} from "../../models/section";
-import {MessageService} from "../../services/message.service";
-import {GlobalService} from "../../services/global.service";
-import {combineLatest} from "rxjs";
-import {SortByPipe} from "../../pipes/sort-by.pipe";
-import { SlotCardComponent } from "../../components/slot-card/slot-card.component";
-
+import { DOCUMENT } from '@angular/common';
+import { Component, DestroyRef, ElementRef, afterNextRender, computed, effect, inject, input } from '@angular/core';
+import { ContentService } from '../../content/content.service';
+import { Locale } from '../../content/content.types';
+import { STRINGS } from '../../i18n/strings';
+import { startPageMotion } from './page-motion';
+import { buildProfileJsonLd } from '../../seo/json-ld';
+import { SeoService } from '../../seo/seo.service';
+import { AiExperienceComponent } from './sections/ai-experience.component';
+import { ContactComponent } from './sections/contact.component';
+import { EducationComponent } from './sections/education.component';
+import { ExperienceComponent } from './sections/experience.component';
+import { HeroComponent } from './sections/hero.component';
+import { ProjectsComponent } from './sections/projects.component';
+import { SkillsComponent } from './sections/skills.component';
 
 @Component({
-    selector: 'app-tab1',
-    templateUrl: 'home.page.html',
-    styleUrls: ['home.page.scss'],
-    standalone: true,
-    imports: [CommonModule, IonicModule, ProfileCardComponent, SortByPipe, SlotCardComponent]
+  selector: 'app-home',
+  imports: [AiExperienceComponent, ContactComponent, EducationComponent, ExperienceComponent, HeroComponent, ProjectsComponent, SkillsComponent],
+  templateUrl: './home.page.html',
 })
 export class HomePage {
-  @ViewChild(IonModal) detailModal!: IonModal;
+  /** Bound from route data (withComponentInputBinding). */
+  readonly locale = input<Locale>('en');
 
-  public config: any
-  public profileImage: string = ''
-  public version: string = environment.version
-  public sections: Array<Section> = []
-  public isModalOpen = false;
-  public currentSection!: Section;
-  public loaded = false;
+  private readonly content = inject(ContentService);
+  protected readonly s = computed(() => STRINGS[this.locale()]);
+  protected readonly intro = computed(() => this.content.get(this.locale()).intro);
+  protected readonly ai = computed(() => this.content.byKind(this.locale(), 'ai-experience')[0]);
+  protected readonly experience = computed(() => this.content.byKind(this.locale(), 'experience')[0]);
+  protected readonly projects = computed(() => this.content.byKind(this.locale(), 'projects')[0]);
+  protected readonly skills = computed(() => this.content.byKind(this.locale(), 'tech'));
+  protected readonly education = computed(() => [
+    ...this.content.byKind(this.locale(), 'schooling'),
+    ...this.content.byKind(this.locale(), 'courses'),
+  ]);
 
-  constructor(
-    private fireService: FirebaseService,
-    private messageService: MessageService,
-    private actionSheetCtrl: ActionSheetController,
-    private globalService: GlobalService,
-    private loadingController: LoadingController,
-  ) {
-  }
-
-  ionViewWillEnter() {
-    this.init()
-  }
-  
-  closeModal() {
-    this.isModalOpen = false
-  }
-
-  openDetails(section: Section) {
-    if(section.description) {
-      this.isModalOpen = false
-      console.log('this.isModalOpen: ',this.isModalOpen)
-      this.isModalOpen = true
-      this.currentSection = section
-    }
-  }
-
-  private async init(): Promise<void> {
-    this.loaded = false
-
-    try {
-      await this.fireService.loadConfig()
-      await this.fireService.loadSections()
-      this.profileImage = await this.fireService.getProfileImages()
-
-      combineLatest({
-        config: this.globalService.config$,
-        sections: this.globalService.sections$
-      }).subscribe(res => {
-        this.config = res.config
-        this.sections = res.sections
-
-        this.loaded = true
-      })
-
-    } catch (err) {
-      console.error(err)
-      this.messageService.showErrorToast()
-    }
-  }
-
-  async presentLanguages() {
-    const actionSheet = await this.actionSheetCtrl.create({
-      cssClass: 'custom-action-sheet',
-      header: this.config.locale.localeSelectTitle,
-      buttons: this.config.languages.map((option: any) => {
-        return {
-          text: option.label,
-          icon: option.icon,
-          handler: () => {
-            this.changeLocale(option.code)
-          }
-        }
-      })
+  constructor() {
+    const document = inject(DOCUMENT);
+    const host = inject(ElementRef<HTMLElement>).nativeElement;
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => destroyRef.onDestroy(startPageMotion(host)));
+    const seo = inject(SeoService);
+    effect(() => {
+      const locale = this.locale();
+      document.documentElement.setAttribute('lang', locale);
+      seo.apply({
+        title: this.s().metaTitle,
+        description: this.s().metaDescription,
+        path: locale === 'es' ? '/es' : '/',
+        locale,
+        ogImage: `/og/og-${locale}.png`,
+        jsonLd: buildProfileJsonLd(this.content.get(locale), locale),
+      });
     });
-
-    await actionSheet.present();
   }
-
-  private async changeLocale(locale: string): Promise<void> {
-    const loading = await this.loadingController.create()
-
-    try {
-      await loading.present()
-      await this.fireService.changeLocale(locale)
-    } catch (err) {
-      console.error(err)
-      this.messageService.showErrorToast()
-    } finally {
-      loading.dismiss()
-    }
-  }
-
 }

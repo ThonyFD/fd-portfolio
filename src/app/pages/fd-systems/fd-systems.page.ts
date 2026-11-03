@@ -1,7 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { IonContent, IonicModule } from '@ionic/angular';
+import { DOCUMENT } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { SeoService } from '../../seo/seo.service';
 
 interface Service {
   icon: string;
@@ -19,15 +19,24 @@ interface Differentiator {
 @Component({
   selector: 'app-fd-systems',
   templateUrl: 'fd-systems.page.html',
-  styleUrls: ['fd-systems.page.scss'],
-  standalone: true,
-  imports: [CommonModule, IonicModule, RouterModule]
+  styleUrl: 'fd-systems.page.scss',
+  imports: [RouterLink]
 })
 export class FdSystemsPage {
 
-  @ViewChild(IonContent) content!: IonContent;
-
   currentYear = new Date().getFullYear();
+
+  constructor() {
+    inject(DOCUMENT).documentElement.setAttribute('lang', 'es');
+    inject(SeoService).apply({
+      title: 'FD Systems | Software a medida e integración de IA',
+      description: 'Desarrollamos software a medida e integramos inteligencia artificial para automatizar procesos y acelerar el crecimiento de tu empresa.',
+      path: '/fd-systems',
+      locale: 'es',
+      ogImage: '/assets/fds-logo.png',
+      alternates: false,
+    });
+  }
 
   services: Service[] = [
     {
@@ -88,10 +97,10 @@ export class FdSystemsPage {
 
   techStack: string[] = ['Angular', 'React', 'Node.js', 'TypeScript', 'Python', 'Firebase', 'AWS', 'Docker', 'PostgreSQL'];
 
-  async scrollTo(sectionId: string): Promise<void> {
+  scrollTo(sectionId: string, event?: Event): void {
     const el = document.getElementById(sectionId);
     if (!el) return;
-    const offset = el.offsetTop - 60;
-    this.content.scrollToPoint(0, offset, 500);
+    event?.preventDefault();
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
