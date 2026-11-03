@@ -1,0 +1,155 @@
+<main class="fds-content">
+
+  <!-- NAV -->
+  <nav class="fds-nav">
+    <div class="fds-nav__logo">
+      <img src="assets/fds-logo.png" alt="FD Systems" />
+    </div>
+    <div class="fds-nav__links">
+      <a href="/fd-systems#services" (click)="scrollTo('services', $event)">Servicios</a>
+      <a href="/fd-systems#why-us" (click)="scrollTo('why-us', $event)">Nosotros</a>
+      <a href="/fd-systems#contact" (click)="scrollTo('contact', $event)">Contacto</a>
+    </div>
+    <a class="fds-btn fds-nav__cta" href="/fd-systems#contact" (click)="scrollTo('contact', $event)">Hablemos</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="fds-hero">
+    <div class="fds-hero__glow fds-hero__glow--blue"></div>
+    <div class="fds-hero__glow fds-hero__glow--orange"></div>
+
+    <div class="fds-hero__content">
+      <img src="assets/fds-logo.png" alt="FD Systems" class="fds-hero__logo" />
+
+      <h1 class="fds-hero__headline">
+        Software que impulsa <br />
+        <span class="fds-hero__headline--gradient">tu negocio hacia el futuro</span>
+      </h1>
+
+      <p class="fds-hero__sub">
+        Desarrollamos soluciones de software a medida e integramos inteligencia
+        artificial para automatizar procesos y acelerar el crecimiento de tu empresa.
+      </p>
+
+      <div class="fds-hero__actions">
+        <a class="fds-btn fds-btn--large fds-btn-primary" href="/fd-systems#contact" (click)="scrollTo('contact', $event)">
+          Comienza tu proyecto
+          <span class="fds-icon" aria-hidden="true" style="--icon: url(assets/icons/arrow-forward.svg)"></span>
+        </a>
+        <a class="fds-btn fds-btn--large fds-btn-outline" href="/fd-systems#services" (click)="scrollTo('services', $event)">
+          Ver servicios
+        </a>
+      </div>
+    </div>
+
+    <div class="fds-hero__scroll-hint" aria-hidden="true" (click)="scrollTo('services')">
+      <span></span>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="fds-section fds-section--dark">
+    <div class="fds-section__inner">
+      <div class="fds-section__header">
+        <span class="fds-badge">Servicios</span>
+        <h2>Todo lo que necesitas para crecer digitalmente</h2>
+        <p>Desde una idea hasta un producto en producción, acompañamos cada etapa.</p>
+      </div>
+
+      <div class="fds-grid">
+        @for (svc of services; track svc.title) {
+          <div class="fds-card">
+            <div class="fds-card__icon">
+              <span class="fds-icon" aria-hidden="true" [style.--icon]="'url(assets/icons/' + svc.icon + '.svg)'"></span>
+            </div>
+            <h3 class="fds-card__title">{{ svc.title }}</h3>
+            <p class="fds-card__desc">{{ svc.description }}</p>
+            <div class="fds-card__tags">
+              @for (tag of svc.tags; track tag) {
+                <span class="fds-tag">{{ tag }}</span>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section id="why-us" class="fds-section fds-section--mid">
+    <div class="fds-section__inner">
+      <div class="fds-section__header">
+        <span class="fds-badge fds-badge--gold">¿Por qué FD Systems?</span>
+        <h2>Tecnología de punta, resultados reales</h2>
+        <p>Combinamos experiencia técnica con visión de negocio para entregarte soluciones que funcionan.</p>
+      </div>
+
+      <div class="fds-grid fds-grid--center">
+        @for (d of differentiators; track d.title) {
+          <div class="fds-diff-card">
+            <div class="fds-diff-card__icon">
+              <span class="fds-icon" aria-hidden="true" [style.--icon]="'url(assets/icons/' + d.icon + '.svg)'"></span>
+            </div>
+            <h3>{{ d.title }}</h3>
+            <p>{{ d.description }}</p>
+          </div>
+        }
+      </div>
+
+      <div class="fds-tech">
+        <p class="fds-tech__label">Tecnologías que dominamos</p>
+        <div class="fds-tech__pills">
+          @for (t of techStack; track t) {
+            <span class="fds-tech__pill">{{ t }}</span>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="fds-section fds-section--contact">
+    <div class="fds-hero__glow fds-hero__glow--blue fds-hero__glow--left"></div>
+    <div class="fds-hero__glow fds-hero__glow--orange fds-hero__glow--right"></div>
+
+    <div class="fds-section__inner fds-contact">
+      <img src="assets/fds-logo.png" alt="FD Systems" class="fds-contact__logo" />
+
+      <h2 class="fds-contact__headline">¿Tienes un proyecto en mente?</h2>
+      <p class="fds-contact__sub">
+        Cuéntanos tu idea y te ayudamos a convertirla en realidad.
+        Sin compromiso, primera consulta gratis.
+      </p>
+
+      <div class="fds-contact__actions">
+        <a class="fds-btn fds-btn--large fds-btn-whatsapp" href="https://api.whatsapp.com/send?l=es&phone=50765839292" target="_blank" rel="noopener">
+          <span class="fds-icon" aria-hidden="true" style="--icon: url(assets/icons/logo-whatsapp.svg)"></span>
+          Escríbenos por WhatsApp
+        </a>
+        <a class="fds-btn fds-btn--large fds-btn-outline" href="mailto:contact@fdsystems.dev">
+          <span class="fds-icon" aria-hidden="true" style="--icon: url(assets/icons/mail-outline.svg)"></span>
+          Enviar correo
+        </a>
+      </div>
+
+      <div class="fds-contact__social">
+        <a href="https://www.linkedin.com/in/thonyfd/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <span class="fds-icon" aria-hidden="true" style="--icon: url(assets/icons/logo-linkedin.svg)"></span>
+        </a>
+        <a href="https://github.com/ThonyFD" target="_blank" rel="noopener" aria-label="GitHub">
+          <span class="fds-icon" aria-hidden="true" style="--icon: url(assets/icons/logo-github.svg)"></span>
+        </a>
+        <a href="https://api.whatsapp.com/send?l=es&phone=50765839292" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <span class="fds-icon" aria-hidden="true" style="--icon: url(assets/icons/logo-whatsapp.svg)"></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="fds-footer">
+    <p>© {{ currentYear }} FD Systems. Todos los derechos reservados.</p>
+    <a routerLink="/" class="fds-footer__back">Ver portafolio personal →</a>
+  </footer>
+
+</main>
