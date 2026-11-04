@@ -42,3 +42,21 @@ npm run content:cutover -- --dry-run && npm run content:cutover
 
 Each run backs up the whole collection to `content/backups/` (gitignored) before writing. Re-runs are no-ops.
 Production builds fail until the cutover has run (the AI section must exist), so run it right before the deploy.
+
+The user's gcloud credentials also work: `GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json`.
+
+## Cutover log (2026-11-03)
+
+- PR #12 merged to `master` (`ad45bd5`). The first production build failed as designed (`expected id="ai-experience"`), the old site stayed live.
+- `npm run content:cutover` changed 8 docs; backup `content/backups/portfolio-2026-11-03T23-57-29-177Z.json`.
+- Production build retried and deployed. Live checks on https://thonyfd.com passed: `/`, `/es`, `/fd-systems` 200,
+  `/en` 301 to `/`, discovery files with the right content types, canonical, JSON-LD, AI section, no `noindex`.
+- `www.thonyfd.com` added as a Pages custom domain (was 522, now 200; canonical points to the apex).
+
+Pending:
+
+- 301 `www` to apex: Cloudflare dashboard > thonyfd.com > Rules > Redirect Rules > "Redirect from WWW to root".
+- Firebase Hosting deploy fails: Service Usage API disabled in GCP project `thony-test`. Enable it and re-run the workflow.
+- Create the Pages deploy hook and store it as `CF_PAGES_DEPLOY_HOOK`.
+- Submit `https://thonyfd.com/sitemap.xml` to Google Search Console and Bing Webmaster Tools; check Rich Results Test
+  and LinkedIn Post Inspector.
